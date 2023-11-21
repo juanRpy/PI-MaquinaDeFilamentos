@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="440.0" prefWidth="799.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.GraphController">
+   <children>
+      <AnchorPane fx:id="slideMenu" layoutX="-144.0" layoutY="1.0" prefHeight="440.0" prefWidth="72.0" style="-fx-background-color: #005792;">
+         <children>
+            <VBox layoutX="96.0" layoutY="162.0" prefHeight="143.0" prefWidth="45.0">
+               <children>
+                  <Button fx:id="hButton" mnemonicParsing="false" prefHeight="31.0" prefWidth="45.0" style="-fx-background-color: #005792;" text="HOME" textFill="WHITE">
+                     <font>
+                        <Font name="Roboto Bold" size="10.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button fx:id="tButton" mnemonicParsing="false" onAction="#switchToTable" prefHeight="30.0" prefWidth="45.0" style="-fx-background-color: #005792;" text="TABLE" textFill="WHITE">
+                     <font>
+                        <Font name="Roboto Bold" size="10.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets top="30.0" />
+                     </VBox.margin>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button fx:id="gButton" layoutX="10.0" layoutY="57.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="45.0" style="-fx-background-color: #005792;" text="GRAPH" textFill="WHITE">
+                     <font>
+                        <Font name="Roboto Bold" size="9.5" />
+                     </font>
+                     <VBox.margin>
+                        <Insets top="30.0" />
+                     </VBox.margin>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+               </children>
+            </VBox>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="menu" prefHeight="440.0" prefWidth="36.0" style="-fx-background-color: #005792;">
+         <children>
+            <VBox alignment="CENTER" layoutY="133.0" prefHeight="200.0" prefWidth="26.0">
+               <children>
+                  <Button fx:id="hButton2" mnemonicParsing="false" onAction="#switchToMenu" prefHeight="28.0" prefWidth="82.0" style="-fx-background-color: #005792;">
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="HOME" mouseTransparent="true" size="20" text="" />
+                     </graphic>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button fx:id="tButton2" mnemonicParsing="false" onAction="#switchToTable" prefHeight="28.0" prefWidth="41.0" style="-fx-background-color: #005792;">
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="DATABASE" size="20" wrappingWidth="14.14285659790039" />
+                     </graphic>
+                     <VBox.margin>
+                        <Insets top="30.0" />
+                     </VBox.margin>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button fx:id="gButton2" maxWidth="23.0" mnemonicParsing="false" style="-fx-background-color: #005792;">
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="LINE_CHART" size="20" wrappingWidth="21.999999999999943" />
+                     </graphic>
+                     <VBox.margin>
+                        <Insets top="30.0" />
+                     </VBox.margin>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+               </children>
+            </VBox>
+         </children>
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color green="0.33725491166114807" blue="0.5607843399047852" />
+               </color>
+            </DropShadow>
+         </effect>
+      </AnchorPane>
+   </children>
+</AnchorPane>
