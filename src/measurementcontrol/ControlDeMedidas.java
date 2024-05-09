@@ -23,7 +23,6 @@ public class ControlDeMedidas extends Application{
     
     @Override
     public void start(Stage escena) {
-        
         Image icon = new Image(getClass().getResourceAsStream("/imagenes/LogoPrincipal.jpeg"));
         escena.getIcons().add(icon);
         
