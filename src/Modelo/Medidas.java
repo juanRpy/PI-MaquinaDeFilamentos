@@ -3,7 +3,6 @@ package Modelo;
 import java.time.LocalDateTime;
 
 public class Medidas {
-    private int id;
     private Double temperatura;
     private Double tiempo;
     private LocalDateTime fecha;
@@ -22,14 +21,6 @@ public class Medidas {
     }
 
     //GETTERS AND SETTERS
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public Double getTemperatura() {
         return temperatura;

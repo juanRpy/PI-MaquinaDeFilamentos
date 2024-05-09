@@ -60,7 +60,7 @@ public class CargarSecciones {
 
             Connection accessBBDD = conexion.getConexion();
 
-            String sql = "UPDATE measures SET temperature=?, times=?, date_time=? WHERE id=?";
+            String sql = "UPDATE measures SET temperature=?, times=?, date_time=?";
 
             try {  
 
@@ -68,7 +68,6 @@ public class CargarSecciones {
                     myStatament.setDouble(1, medida.getTemperatura());
                     myStatament.setDouble(2, medida.getTiempo());
                     myStatament.setTimestamp(3, Timestamp.valueOf(medida.getFecha()));
-                    myStatament.setInt(4, medida.getId());
                     myStatament.execute();
 
                     return true;
