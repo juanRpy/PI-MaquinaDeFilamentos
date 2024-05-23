@@ -153,6 +153,25 @@ public class ControladorTabla {
 	    	Bajustes2.setStyle("-fx-background-color: #005792; -fx-background-radius: 0");
 	});
         
+        Button Bperfil = escenaTabla.getBperfil();
+        Button Bperfil2 = escenaTabla.getBperfil2();
+        Bperfil.setOnMouseEntered(event -> {
+            Bperfil.setStyle("-fx-background-color: #004781; -fx-background-radius: 0");
+            Bperfil2.setStyle("-fx-background-color: #004781; -fx-background-radius: 0");
+	});
+        Bperfil.setOnMouseExited(event -> {
+            Bperfil.setStyle("-fx-background-color: #005792; -fx-background-radius: 0");
+            Bperfil2.setStyle("-fx-background-color: #005792; -fx-background-radius: 0");
+	});
+        Bperfil2.setOnMouseEntered(event -> {
+            Bperfil.setStyle("-fx-background-color: #004781; -fx-background-radius: 0");
+            Bperfil2.setStyle("-fx-background-color: #004781; -fx-background-radius: 0");
+	});
+        Bperfil2.setOnMouseExited(event -> {
+            Bperfil.setStyle("-fx-background-color: #005792; -fx-background-radius: 0");
+            Bperfil2.setStyle("-fx-background-color: #005792; -fx-background-radius: 0");
+	});
+        
         Button Bdescargar = escenaTabla.getBdescargar();
         Bdescargar.setOnAction((t) -> {
             exportToExcel();
@@ -231,6 +250,13 @@ public class ControladorTabla {
         });
         Bajustes2.setOnMousePressed(event -> {
             cMenu.cambioDeEscena(cMenu.getEscenaAjustes());
+        });
+        
+        Bperfil.setOnMousePressed(event -> {
+            cMenu.cambioDeEscena(cMenu.getEscenaPerfil());
+        });
+        Bperfil2.setOnMousePressed(event -> {
+            cMenu.cambioDeEscena(cMenu.getEscenaPerfil());
         });
         
         loadColumn();

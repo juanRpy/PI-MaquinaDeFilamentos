@@ -29,7 +29,11 @@ public class MenuPrincipal {
     private Scene escenaPrincipal;
     private Label bienvenida;
     private Label Menu;
-    private Button Bnoti;
+    private ToggleButton Bnoti;
+    private FontAwesomeIconView BnotiIcon;
+    private ImageView BnotiI_2;
+    private ImageView BnotiI;
+    private Pane Pnotificaciones;
     private Button Bconfig;
     private ToggleButton Bpower;
     private Button Binicio;
@@ -40,6 +44,9 @@ public class MenuPrincipal {
     private Button Bgrafica2;
     private Button Bajustes;
     private Button Bajustes2;
+    private Button Bperfil;
+    private Button Bperfil2;
+    private Button BLogin;
     private Button BCambioDePerfil;
     private AnchorPane slideMenu;
     private AnchorPane menu;
@@ -52,8 +59,10 @@ public class MenuPrincipal {
     private Label Ltiempo2;
     private Label LSmotor;
     private Label LStemp;
+    private Label LSVventilador;
     private Slider Smotor;
     private Slider Stemp;
+    private Slider SVventilador;
     private ComboBox CambioDePerfil;
     
     static final int DATA_SERIES_SIZE = 100; // Número máximo de puntos en la serie de datos
@@ -96,17 +105,34 @@ public class MenuPrincipal {
         //Botones superiores
 
         //Botón de notificación
-        Bnoti = new Button();
+        Bnoti = new ToggleButton();
         Bnoti.setLayoutX(128);
         Bnoti.setLayoutY(13);
         Bnoti.setStyle("-fx-background-color: white;");
         Bnoti.setCursor(Cursor.HAND);
 
-        FontAwesomeIconView BnotiIcon = new FontAwesomeIconView();
+        
+        Image BnotiI1 = new Image("Imagenes/Noti_1.png");
+        BnotiI = new ImageView();
+        BnotiI.setImage(BnotiI1);
+        Bnoti.setGraphic(BnotiI);
+        
+        Image BnotiI2 = new Image("Imagenes/Noti_2.png");
+        BnotiI_2 = new ImageView();
+        BnotiI_2.setImage(BnotiI2);
+        
+        /*
+        BnotiIcon = new FontAwesomeIconView();
         BnotiIcon.setFill(Color.rgb(0, 0, 0));
-        BnotiIcon.setGlyphName("BELL");
+        BnotiIcon.setGlyphName("BELL_ALT");
         BnotiIcon.setSize("20"); 
         Bnoti.setGraphic(BnotiIcon);
+        */
+        Pnotificaciones = new Pane();
+        Pnotificaciones.setLayoutX(473);
+        Pnotificaciones.setLayoutY(-200);
+        Pnotificaciones.setPrefSize(200, 180);
+        Pnotificaciones.setStyle("-fx-background-color:  WHITE; -fx-background-radius: 10; -fx-border-radius: 10;");
 
 
         //Botón de configuración
@@ -230,24 +256,46 @@ public class MenuPrincipal {
         LStemp.setTextFill(Color.WHITE);
 
         Ctemp.getChildren().addAll(CtempImage,CtempImage2,Stemp,LStemp);
+        
+        
+        Pane Vventilador = new Pane();
+        Vventilador.setLayoutX(18);
+        Vventilador.setLayoutY(357);
+        Vventilador.setPrefSize(215, 67);
+        Vventilador.setStyle("-fx-background-color:  #f9b248; -fx-background-radius: 10; -fx-border-radius: 10;");
 
-        Pane Cenergia = new Pane();
-        Cenergia.setLayoutX(18);
-        Cenergia.setLayoutY(357);
-        Cenergia.setPrefSize(215, 67);
-        Cenergia.setStyle("-fx-background-color:  #f9b248; -fx-background-radius: 10; -fx-border-radius: 10;");
+        Image VventiladorI = new Image("Imagenes/Vventilador2.png");
+        ImageView VventiladorImage = new ImageView();
+        VventiladorImage.setImage(VventiladorI);
+        VventiladorImage.setLayoutX(10);
+        VventiladorImage.setLayoutY(15);
+        VventiladorImage.setFitWidth(40);
+        VventiladorImage.setFitHeight(35);
 
-        Image CenergiaI = new Image("Imagenes/CenergiaI.png");
-        ImageView CenergiaImage = new ImageView();
-        CenergiaImage.setImage(CenergiaI);
-        CenergiaImage.setLayoutX(10);
-        CenergiaImage.setLayoutY(15);
-        CenergiaImage.setFitWidth(40);
-        CenergiaImage.setFitHeight(35);
+        Image VventiladorI2 = new Image("Imagenes/Vventilador.png");
+        ImageView VventiladorI2Image2 = new ImageView();
+        VventiladorI2Image2.setImage(VventiladorI2);
+        VventiladorI2Image2.setLayoutX(165);
+        VventiladorI2Image2.setLayoutY(15);
+        VventiladorI2Image2.setFitWidth(40);
+        VventiladorI2Image2.setFitHeight(35);
 
-        Cenergia.getChildren().addAll(CenergiaImage);
-        pane.getChildren().addAll(Vmotor,Ctemp,Cenergia, Bnoti, Bconfig, Bpower,Lhora,separador);
+        SVventilador = new Slider();
+        SVventilador.setLayoutX(52);
+        SVventilador.setLayoutY(27);
+        SVventilador.setPrefSize(110, 10);
+        SVventilador.setCursor(Cursor.HAND);
+        
+        LSVventilador = new Label(""+Smotor.getValue());
+        LSVventilador.setLayoutX(92);
+        LSVventilador.setLayoutY(10);
+        LSVventilador.setPrefSize(110, 10);
+        LSVventilador.setTextFill(Color.WHITE);
 
+        Vventilador.getChildren().addAll(VventiladorImage,VventiladorI2Image2,SVventilador,LSVventilador);
+
+        pane.getChildren().addAll(Vmotor,Ctemp,Vventilador, Bnoti, Bconfig, Bpower,Lhora,separador);
+        
         //Sector Central
         Pane Ptemp = new Pane();
         Ptemp.setLayoutX(108);
@@ -391,7 +439,7 @@ public class MenuPrincipal {
         //Botones Slidemenu
         Binicio2 = new Button();
         Binicio2.setLayoutX(100);
-        Binicio2.setLayoutY(143);
+        Binicio2.setLayoutY(83);
         Binicio2.setPrefSize(55, 27);
         Binicio2.setText("INICIO");
         Binicio2.setTextFill(Color.WHITE);
@@ -401,7 +449,7 @@ public class MenuPrincipal {
 
         Btabla2 = new Button();
         Btabla2.setLayoutX(100);
-        Btabla2.setLayoutY(203);
+        Btabla2.setLayoutY(143);
         Btabla2.setPrefSize(55, 28);
         Btabla2.setText("TABLA");
         Btabla2.setTextFill(Color.WHITE);
@@ -411,7 +459,7 @@ public class MenuPrincipal {
 
         Bgrafica2 = new Button();
         Bgrafica2.setLayoutX(95);
-        Bgrafica2.setLayoutY(263);
+        Bgrafica2.setLayoutY(203);
         Bgrafica2.setText("GRAFICA");
         Bgrafica2.setPrefSize(65, 28);
         Bgrafica2.setTextFill(Color.WHITE);
@@ -420,21 +468,30 @@ public class MenuPrincipal {
         
         Bajustes2 = new Button();
         Bajustes2.setLayoutX(95);
-        Bajustes2.setLayoutY(323);
+        Bajustes2.setLayoutY(263);
         Bajustes2.setText("AJUSTES");
         Bajustes2.setPrefSize(70, 28);
         Bajustes2.setTextFill(Color.WHITE);
         Bajustes2.setStyle("-fx-background-color: #005792;");
         Bajustes2.setCursor(Cursor.HAND);
+        
+        Bperfil2 = new Button();
+        Bperfil2.setLayoutX(95);
+        Bperfil2.setLayoutY(323);
+        Bperfil2.setText("PERFIL");
+        Bperfil2.setPrefSize(70, 28);
+        Bperfil2.setTextFill(Color.WHITE);
+        Bperfil2.setStyle("-fx-background-color: #005792;");
+        Bperfil2.setCursor(Cursor.HAND);
 
-        slideMenu.getChildren().addAll(Binicio2,Btabla2, Bgrafica2, Bajustes2);
+        slideMenu.getChildren().addAll(Binicio2,Btabla2, Bgrafica2, Bajustes2,Bperfil2);
 
 
         //Botones menu
         Binicio = new Button();
-        Binicio.setLayoutX(4.7);
-        Binicio.setLayoutY(143);
-        Binicio.setPrefSize(30, 27);
+        Binicio.setLayoutX(0);
+        Binicio.setLayoutY(83);
+        Binicio.setPrefSize(40, 27);
         Binicio.setStyle("-fx-background-color: #005792;");
         Binicio.setCursor(Cursor.HAND);
 
@@ -448,9 +505,9 @@ public class MenuPrincipal {
 
 
         Btabla = new Button();
-        Btabla.setLayoutX(6);
-        Btabla.setLayoutY(203);
-        Btabla.setPrefSize(30, 27);
+        Btabla.setLayoutX(0);
+        Btabla.setLayoutY(143);
+        Btabla.setPrefSize(40, 27);
         Btabla.setStyle("-fx-background-color: #005792;");
         Btabla.setCursor(Cursor.HAND);
 
@@ -462,9 +519,9 @@ public class MenuPrincipal {
 
 
         Bgrafica = new Button();
-        Bgrafica.setLayoutX(1);
-        Bgrafica.setLayoutY(263);
-        Bgrafica.setPrefSize(30, 27);
+        Bgrafica.setLayoutX(0);
+        Bgrafica.setLayoutY(203);
+        Bgrafica.setPrefSize(40, 27);
         Bgrafica.setStyle("-fx-background-color: #005792;");
         Bgrafica.setCursor(Cursor.HAND);
 
@@ -475,9 +532,9 @@ public class MenuPrincipal {
         Bgrafica.setGraphic(BgraficaIcon);
         
         Bajustes = new Button();
-        Bajustes.setLayoutX(6);
-        Bajustes.setLayoutY(323);
-        Bajustes.setPrefSize(30, 27);
+        Bajustes.setLayoutX(0);
+        Bajustes.setLayoutY(263);
+        Bajustes.setPrefSize(40, 27);
         Bajustes.setStyle("-fx-background-color: #005792;");
         Bajustes.setCursor(Cursor.HAND);
         
@@ -486,8 +543,27 @@ public class MenuPrincipal {
         BajustesIcon.setGlyphName("GEAR");
         BajustesIcon.setSize("20");
         Bajustes.setGraphic(BajustesIcon);
+        
+        
+        Bperfil = new Button();
+        Bperfil.setLayoutX(0);
+        Bperfil.setLayoutY(323);
+        Bperfil.setPrefSize(40, 27);
+        Bperfil.setStyle("-fx-background-color: #005792;");
+        Bperfil.setCursor(Cursor.HAND);
+        
+        FontAwesomeIconView BperfilIcon = new FontAwesomeIconView();
+        BperfilIcon.setFill(Color.WHITE);
+        BperfilIcon.setGlyphName("USER");
+        BperfilIcon.setSize("20");
+        Bperfil.setGraphic(BperfilIcon);
 
-        menu.getChildren().addAll(Binicio,Btabla, Bgrafica,Bajustes);
+        menu.getChildren().addAll(Binicio,Btabla, Bgrafica,Bajustes,Bperfil);
+        
+        BLogin = new Button();
+        BLogin.setLayoutX(6);
+        BLogin.setLayoutY(373);
+        BLogin.setPrefSize(30, 27);
 
         DropShadow dropShadow1 = new DropShadow();
         dropShadow1.setHeight(22.47);
@@ -500,7 +576,8 @@ public class MenuPrincipal {
         lineChart.setEffect(dropShadow1);
         Vmotor.setEffect(dropShadow1);
         Ctemp.setEffect(dropShadow1);
-        Cenergia.setEffect(dropShadow1);
+        Vventilador.setEffect(dropShadow1);
+        Pnotificaciones.setEffect(dropShadow1);
 
         DropShadow dropShadow2 = new DropShadow();
         dropShadow2.setHeight(22.47);
@@ -527,7 +604,7 @@ public class MenuPrincipal {
         Ptiempo.getChildren().addAll(fontAwesomeIconView1);
         Ptemp.getChildren().addAll(fontAwesomeIconView2);
 
-        anchorPane.getChildren().addAll(menu,slideMenu, lineChart, pane);
+        anchorPane.getChildren().addAll(menu,slideMenu, lineChart, pane,Pnotificaciones,BLogin);
     }
     
 
@@ -575,20 +652,36 @@ public class MenuPrincipal {
         return LSmotor;
     }
     
-    public Button getBnoti() {
+    public Label getLsVventilador(){
+        return LSVventilador;
+    }
+    
+    public ToggleButton getBnoti() {
         return Bnoti;
     }
-
-    public Button getBajustes() {
-        return Bajustes;
+    
+    public FontAwesomeIconView getBnotiIcon() {
+        return BnotiIcon;
     }
-
-    public Button getBajustes2() {
-        return Bajustes2;
+    
+    public ImageView getBnotiI_2() {
+        return BnotiI_2;
+    }
+    
+    public ImageView getBnotiI() {
+        return BnotiI;
+    }
+    
+    public Pane getPnotificaciones() {
+        return Pnotificaciones;
     }
     
     public Button getBconfig() {
         return Bconfig;
+    }
+    
+    public Button getBLogin() {
+        return BLogin;
     }
     
     public ToggleButton getBpower() {
@@ -619,6 +712,22 @@ public class MenuPrincipal {
         return Bgrafica2;
     }
     
+    public Button getBajustes() {
+        return Bajustes;
+    }
+
+    public Button getBajustes2() {
+        return Bajustes2;
+    }
+    
+    public Button getBperfil() {
+        return Bperfil;
+    }
+
+    public Button getBperfil2() {
+        return Bperfil2;
+    }
+    
     public Button getBCambioDePerfil() {
         return BCambioDePerfil;
     }
@@ -643,6 +752,10 @@ public class MenuPrincipal {
     
     public Slider sTemp(){
         return Stemp;
+    }
+    
+    public Slider sVventilador(){
+        return SVventilador;
     }
     
     public XYChart.Series<Number, Number> getDataSeries() {

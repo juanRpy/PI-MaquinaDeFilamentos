@@ -38,6 +38,8 @@ public class EscenaGrafica {
     private Button Btabla2;
     private Button Bgrafica2;
     private Button Bajustes2;
+    private Button Bperfil;
+    private Button Bperfil2;
     
     static final int DATA_SERIES_SIZE = 10; // Número máximo de puntos en la serie de datos
     static final int MIN_Y_VALUE = 20;
@@ -69,85 +71,92 @@ public class EscenaGrafica {
         //Botones Slidemenu
         Binicio2 = new Button();
         Binicio2.setLayoutX(100);
-        Binicio2.setLayoutY(143);
+        Binicio2.setLayoutY(83);
         Binicio2.setPrefSize(55, 27);
         Binicio2.setText("INICIO");
         Binicio2.setTextFill(Color.WHITE);
         Binicio2.setStyle("-fx-background-color: #005792;");
         Binicio2.setCursor(Cursor.HAND);
-        
-        
+
+
         Btabla2 = new Button();
         Btabla2.setLayoutX(100);
-        Btabla2.setLayoutY(203);
-        Btabla2.setPrefSize(60, 28);
+        Btabla2.setLayoutY(143);
+        Btabla2.setPrefSize(55, 28);
         Btabla2.setText("TABLA");
         Btabla2.setTextFill(Color.WHITE);
         Btabla2.setStyle("-fx-background-color: #005792;");
         Btabla2.setCursor(Cursor.HAND);
-        
-        
+
+
         Bgrafica2 = new Button();
         Bgrafica2.setLayoutX(95);
-        Bgrafica2.setLayoutY(263);
+        Bgrafica2.setLayoutY(203);
         Bgrafica2.setText("GRAFICA");
         Bgrafica2.setPrefSize(65, 28);
         Bgrafica2.setTextFill(Color.WHITE);
         Bgrafica2.setStyle("-fx-background-color: #005792;");
         Bgrafica2.setCursor(Cursor.HAND);
         
-        
         Bajustes2 = new Button();
         Bajustes2.setLayoutX(95);
-        Bajustes2.setLayoutY(323);
+        Bajustes2.setLayoutY(263);
         Bajustes2.setText("AJUSTES");
         Bajustes2.setPrefSize(70, 28);
         Bajustes2.setTextFill(Color.WHITE);
         Bajustes2.setStyle("-fx-background-color: #005792;");
         Bajustes2.setCursor(Cursor.HAND);
         
-        
-        slideMenu.getChildren().addAll(Binicio2,Btabla2, Bgrafica2, Bajustes2);
+        Bperfil2 = new Button();
+        Bperfil2.setLayoutX(95);
+        Bperfil2.setLayoutY(323);
+        Bperfil2.setText("PERFIL");
+        Bperfil2.setPrefSize(70, 28);
+        Bperfil2.setTextFill(Color.WHITE);
+        Bperfil2.setStyle("-fx-background-color: #005792;");
+        Bperfil2.setCursor(Cursor.HAND);
+
+        slideMenu.getChildren().addAll(Binicio2,Btabla2, Bgrafica2, Bajustes2,Bperfil2);
         
         
         //Botones menu
         Binicio = new Button();
-        Binicio.setLayoutX(4.7);
-        Binicio.setLayoutY(143);
-        Binicio.setPrefSize(30, 27);
+        Binicio.setLayoutX(0);
+        Binicio.setLayoutY(83);
+        Binicio.setPrefSize(40, 27);
         Binicio.setStyle("-fx-background-color: #005792;");
         Binicio.setCursor(Cursor.HAND);
-        
+
         FontAwesomeIconView BinicioIcon = new FontAwesomeIconView();
         BinicioIcon.setFill(Color.WHITE);
         BinicioIcon.setStyle("-fx-background-radius: 0;");
         BinicioIcon.setGlyphName("HOME");
         BinicioIcon.setSize("20");
-        
+
         Binicio.setGraphic(BinicioIcon);
-        
-        
+
+
         Btabla = new Button();
-        Btabla.setLayoutX(6);
-        Btabla.setLayoutY(203);
-        Btabla.setPrefSize(30, 27);
+        Btabla.setLayoutX(0);
+        Btabla.setLayoutY(143);
+        Btabla.setPrefSize(40, 27);
         Btabla.setStyle("-fx-background-color: #005792;");
         Btabla.setCursor(Cursor.HAND);
-        
+
         FontAwesomeIconView BtablaIcon = new FontAwesomeIconView();
         BtablaIcon.setFill(Color.WHITE);
         BtablaIcon.setGlyphName("DATABASE");
         BtablaIcon.setSize("20");
         Btabla.setGraphic(BtablaIcon);
-        
-        
+
+
         Bgrafica = new Button();
-        Bgrafica.setLayoutX(1);
-        Bgrafica.setLayoutY(263);
-        Bgrafica.setPrefSize(30, 27);
+        Bgrafica.setLayoutX(0);
+        Bgrafica.setLayoutY(203);
+        Bgrafica.setPrefSize(40, 27);
         Bgrafica.setStyle("-fx-background-color: #005792;");
         Bgrafica.setCursor(Cursor.HAND);
-        
+
         FontAwesomeIconView BgraficaIcon = new FontAwesomeIconView();
         BgraficaIcon.setFill(Color.WHITE);
         BgraficaIcon.setGlyphName("LINE_CHART");
@@ -155,9 +164,9 @@ public class EscenaGrafica {
         Bgrafica.setGraphic(BgraficaIcon);
         
         Bajustes = new Button();
-        Bajustes.setLayoutX(6);
-        Bajustes.setLayoutY(323);
-        Bajustes.setPrefSize(30, 27);
+        Bajustes.setLayoutX(0);
+        Bajustes.setLayoutY(263);
+        Bajustes.setPrefSize(40, 27);
         Bajustes.setStyle("-fx-background-color: #005792;");
         Bajustes.setCursor(Cursor.HAND);
         
@@ -167,7 +176,21 @@ public class EscenaGrafica {
         BajustesIcon.setSize("20");
         Bajustes.setGraphic(BajustesIcon);
         
-        menu.getChildren().addAll(Binicio,Btabla, Bgrafica,Bajustes);
+        
+        Bperfil = new Button();
+        Bperfil.setLayoutX(0);
+        Bperfil.setLayoutY(323);
+        Bperfil.setPrefSize(40, 27);
+        Bperfil.setStyle("-fx-background-color: #005792;");
+        Bperfil.setCursor(Cursor.HAND);
+        
+        FontAwesomeIconView BperfilIcon = new FontAwesomeIconView();
+        BperfilIcon.setFill(Color.WHITE);
+        BperfilIcon.setGlyphName("USER");
+        BperfilIcon.setSize("20");
+        Bperfil.setGraphic(BperfilIcon);
+
+        menu.getChildren().addAll(Binicio,Btabla, Bgrafica,Bajustes,Bperfil);
         
         
         //Hora
@@ -362,6 +385,15 @@ public class EscenaGrafica {
     public Button getBajustes2() {
         return Bajustes2;
     }
+    
+    public Button getBperfil() {
+        return Bperfil;
+    }
+
+    public Button getBperfil2() {
+        return Bperfil2;
+    }
+    
     public XYChart.Series<Number, Number> getDataSeries() {
          return dataSeries;
      }

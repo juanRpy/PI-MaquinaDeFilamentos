@@ -1,41 +1,44 @@
 package vista;
 
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.geometry.Orientation;
 import javafx.scene.Cursor;
 import javafx.scene.Scene;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.Separator;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleButton;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import org.controlsfx.control.ToggleSwitch;
 
-
-public class EscenaAjustes {
-    
-    private Scene escenaAjustes;
-    private AnchorPane anchorPane4;
-    private Scene EscenaPrincipal;
-    private Scene EscenaTabla;
-    private EscenaTabla escena_Tabla;
-    private Label Lhora;
-    private Label LModoNoche;
-    private Label bienvenida;
-    private Label Menu;
+public class EscenaPerfil {
+    private Scene escenaPerfil;
     private AnchorPane menu;
     private AnchorPane slideMenu;
-    private ComboBox EscalaTemp;
-    private Label LEscalaTemp;
-    private Label LCambioIdiomas;
-    private ComboBox CambioIdiomas;
+    private AnchorPane anchorPane4;
+    private TableColumn temperatureCol;
+    private TableColumn timeCol;
+    private TableColumn dateCol;
+    private Label Lhora;
+    private Label bienvenida;
+    private Label Menu;
     private Button Bnoti;
     private Button Bconfig;
     private Button Bpower;
     private Button Bajustes;
+    private Button Bperfil;
+    private Button Bperfil2;
     private Button Binicio;
     private Button Btabla;
     private Button Bgrafica;
@@ -43,21 +46,16 @@ public class EscenaAjustes {
     private Button Btabla2;
     private Button Bgrafica2;
     private Button Bajustes2;
-    private Button Bperfil;
-    private Button Bperfil2;
-    private Button BGuardarAjustes;
-    private ToggleSwitch ModoNoche;
-    
-    public EscenaAjustes(){
-        ajustesGUI();
+
+    public EscenaPerfil() {
+        perfilGUI();
     }
     
-    public void ajustesGUI(){
-        
-        anchorPane4 = new AnchorPane();
+    public void perfilGUI(){
+        anchorPane4 = new AnchorPane(); // Elimina la declaración AnchorPane
         anchorPane4.setPrefSize(800, 440);
         anchorPane4.setStyle("-fx-background-color: white;-fx-background-radius: 10");
-        escenaAjustes = new Scene(anchorPane4);
+        escenaPerfil = new Scene(anchorPane4);
         
         slideMenu = new AnchorPane();
         menu = new AnchorPane();
@@ -65,7 +63,6 @@ public class EscenaAjustes {
         menu.setLayoutX(0);
         menu.setLayoutY(0);
         menu.setStyle("-fx-background-color: #005792;");
-        
         
         //Botones Slidemenu
         Binicio2 = new Button();
@@ -251,11 +248,6 @@ public class EscenaAjustes {
 
         Bpower.setGraphic(BpowerIcon);
         
-        Menu = new Label();
-        Menu.setText("Ajustes");
-        Menu.setLayoutX(122);
-        Menu.setLayoutY(14);
-        Menu.setTextFill(Color.rgb(0, 87, 145));
         
         //Separador
         Separator separador2 = new Separator();
@@ -264,125 +256,147 @@ public class EscenaAjustes {
         separador2.setPrefSize(4, 25);
         separador2.setOrientation(Orientation.VERTICAL);
         
+        //Mensaje de bienvenida
+        Menu = new Label();
+        Menu.setText("Gráfica");
+        Menu.setLayoutX(123);
+        Menu.setLayoutY(14);
+        Menu.setTextFill(Color.rgb(0, 87, 145));
+        
         bienvenida = new Label();
-        bienvenida.setText("¿Que hay para cambiar?");
+        bienvenida.setText("Observa su comportamiento");
         bienvenida.setLayoutX(182);
         bienvenida.setLayoutY(14);
         
-        //Cambiar Medida de Temperatura
-        LEscalaTemp = new Label();
-        LEscalaTemp.setLayoutX(110);
-        LEscalaTemp.setLayoutY(200);
-        LEscalaTemp.setPrefSize(200, 27);
-        LEscalaTemp.setText("Escalas de temperatura");
-        LEscalaTemp.setFont(new Font("Verdana", 14));
+        // Datos del usuario
+        
+        Label Lnombre = new Label();
+        Lnombre.setText("Nombre:");
+        Lnombre.setLayoutX(120);
+        Lnombre.setLayoutY(100);
+        Lnombre.setFont(new Font("Verdana", 14));
+        
+        TextField TFnombre = new TextField();
+        TFnombre.setText("Nombre");
+        TFnombre.setLayoutX(185);
+        TFnombre.setLayoutY(95);
+        TFnombre.setEditable(false);
+        TFnombre.setFont(new Font("Verdana", 14));
+        TFnombre.setStyle("-fx-background-color:TRANSPARENT");
+        
+        Label Lusuario = new Label();
+        Lusuario.setText("Usuario:");
+        Lusuario.setLayoutX(120);
+        Lusuario.setLayoutY(160);
+        Lusuario.setFont(new Font("Verdana", 14));
+        
+        TextField TFusuario = new TextField();
+        TFusuario.setText("Nombre");
+        TFusuario.setLayoutX(183);
+        TFusuario.setLayoutY(155);
+        TFusuario.setEditable(false);
+        TFusuario.setFont(new Font("Verdana", 14));
+        TFusuario.setStyle("-fx-background-color:TRANSPARENT");
+        
+        Label Lcontraseña = new Label();
+        Lcontraseña.setText("Contraseña:");
+        Lcontraseña.setLayoutX(120);
+        Lcontraseña.setLayoutY(220);
+        Lcontraseña.setFont(new Font("Verdana", 14));
+        
+        PasswordField ContraseñaPF = new PasswordField();
+        ContraseñaPF.setText("Nombre");
+        ContraseñaPF.setLayoutX(210);
+        ContraseñaPF.setLayoutY(215);
+        ContraseñaPF.setPrefSize(156, 25);
+        ContraseñaPF.setFont(new Font("Verdana", 14));
+        ContraseñaPF.setStyle("-fx-background-color:TRANSPARENT");
+        ContraseñaPF.setEditable(false);
+        
+        ContraseñaPF.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if (newValue.contains(" ")) {
+                    ContraseñaPF.setText(newValue.replace(" ", ""));
+                }
+            }
+        });
         
         
-        EscalaTemp = new ComboBox();
-        EscalaTemp.setLayoutX(300);
-        EscalaTemp.setLayoutY(202);
-        EscalaTemp.setPromptText("Escalas");
-        
-        EscalaTemp.getItems().add(0,"Celsius");
-        EscalaTemp.getItems().add(1,"Farenheit");
-        EscalaTemp.getItems().add(2,"Kelvin");
-        
-        
-        
-        //Cambiar Idioma
-        LCambioIdiomas = new Label();
-        LCambioIdiomas.setLayoutX(110);
-        LCambioIdiomas.setLayoutY(250);
-        LCambioIdiomas.setPrefSize(200, 27);
-        LCambioIdiomas.setText("Cambiar idioma");
-        LCambioIdiomas.setFont(new Font("Verdana", 14));
+        TextField ContraseñaTF = new TextField();
+        ContraseñaTF.setText("Nombre");
+        ContraseñaTF.setLayoutX(210);
+        ContraseñaTF.setLayoutY(215);
+        ContraseñaTF.setPrefSize(156, 25);
+        ContraseñaTF.setFont(new Font("Verdana", 14));
+        ContraseñaTF.setStyle("-fx-background-color:TRANSPARENT");
+        ContraseñaTF.setEditable(false);
+        ContraseñaTF.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if (newValue.contains(" ")) {
+                    ContraseñaTF.setText(newValue.replace(" ", ""));
+                }
+            }
+        });
         
         
-        CambioIdiomas = new ComboBox();
-        CambioIdiomas.setLayoutX(300);
-        CambioIdiomas.setLayoutY(252);
-        CambioIdiomas.setPromptText("Idiomas");
-        
-        CambioIdiomas.getItems().add(0,"Español");
-        CambioIdiomas.getItems().add(1,"English");
-        CambioIdiomas.getItems().add(2,"Portuguese");
+        ContraseñaTF.textProperty().bindBidirectional(ContraseñaPF.textProperty());
         
         
-        //Modo Noche
-        LModoNoche = new Label();
-        LModoNoche.setLayoutX(110);
-        LModoNoche.setLayoutY(300);
-        LModoNoche.setPrefSize(150, 27);
-        LModoNoche.setText("Modo noche");
-        LModoNoche.setFont(new Font("Verdana", 14));
+        ToggleButton VerContraseñaB = new ToggleButton();
+        VerContraseñaB.setLayoutX(300);
+        VerContraseñaB.setLayoutY(218);
+        VerContraseñaB.setStyle("-fx-background-color:  TRANSPARENT;");
+        VerContraseñaB.setCursor(Cursor.HAND);
         
-        ModoNoche = new ToggleSwitch();
-        ModoNoche.setLayoutX(300);
-        ModoNoche.setLayoutY(305);
+        FontAwesomeIconView VerContraseñaFA = new FontAwesomeIconView();
+        VerContraseñaFA.setFill(Color.rgb(0, 0, 0));
+        VerContraseñaFA.setGlyphName("EYE");
+        VerContraseñaFA.setSize("12");
+        VerContraseñaB.setGraphic(VerContraseñaFA);
+        
+        FontAwesomeIconView VerContraseñaFA2 = new FontAwesomeIconView();
+        VerContraseñaFA2.setFill(Color.rgb(0, 0, 0));
+        VerContraseñaFA2.setGlyphName("EYE_SLASH");
+        VerContraseñaFA2.setSize("12");
         
         
-        BGuardarAjustes = new Button();
-        BGuardarAjustes.setLayoutX(110);
-        BGuardarAjustes.setLayoutY(380);
-        BGuardarAjustes.setPrefSize(150, 27);
-        BGuardarAjustes.setText("GUARDAR AJUSTES");
-        BGuardarAjustes.setTextFill(Color.WHITE);
-        BGuardarAjustes.setStyle("-fx-background-color: #005792;");
-        BGuardarAjustes.setCursor(Cursor.HAND);
+        //Ver contraseña u Ocultar
+        VerContraseñaB.setGraphic(VerContraseñaFA2);
+        ContraseñaTF.setManaged(false);
+        ContraseñaTF.setVisible(false);
+        ContraseñaPF.setManaged(true);
+        ContraseñaPF.setVisible(true);
+        VerContraseñaB.selectedProperty().addListener((obs,oldVal,newVal) -> {
+            if(newVal){
+               VerContraseñaB.setGraphic(VerContraseñaFA);
+               ContraseñaTF.setManaged(true);
+               ContraseñaTF.setVisible(true);
+               ContraseñaPF.setManaged(false);
+               ContraseñaPF.setVisible(false);
+            }
+            else{
+               VerContraseñaB.setGraphic(VerContraseñaFA2);
+               ContraseñaTF.setManaged(false);
+               ContraseñaTF.setVisible(false);
+               ContraseñaPF.setManaged(true);
+               ContraseñaPF.setVisible(true);
+            }
+        });
         
-        anchorPane4.getChildren().addAll(menu,slideMenu,Lhora,separador,Bnoti,Bconfig,Bpower,Menu,separador2,bienvenida,BGuardarAjustes,LModoNoche,LEscalaTemp,EscalaTemp,LCambioIdiomas,CambioIdiomas,ModoNoche);
-    }
-    
-    public AnchorPane getanchorPane4() {
-        return anchorPane4;
-    }
-    
-    public AnchorPane getmenu() {
-        return menu;
-    }
-    
-    public AnchorPane getslideMenu() {
-        return slideMenu;
+        
+        anchorPane4.getChildren().addAll(menu,slideMenu,Lhora,separador,Bnoti,Bconfig,Bpower,separador2,bienvenida,Menu,Lnombre,TFnombre,Lusuario,TFusuario,Lcontraseña,ContraseñaPF,ContraseñaTF,VerContraseñaB);
+        
+        
     }
 
-    public Label getLModoNoche() {
-        return LModoNoche;
-    }
-    
-    public ToggleSwitch getModoNoche() {
-        return ModoNoche;
-    }
-
-    public Label getLEscalaTemp() {
-        return LEscalaTemp;
-    }
-
-    public Label getLCambioIdiomas() {
-        return LCambioIdiomas;
-    }
-    
-    public Label getbienvenida() {
-        return bienvenida;
-    }
-
-    public ComboBox getEscalaTemp() {
-        return EscalaTemp;
-    }
-
-    public ComboBox getCambioIdiomas() {
-        return CambioIdiomas;
-    }
-
-    public Button getBGuardarAjustes() {
-        return BGuardarAjustes;
-    }
-    
     public AnchorPane getAnchorPane4() {
         return anchorPane4;
     }
     
-    public Scene getEscenaAjustes() {
-        return escenaAjustes;
+    public Scene getEscenaPerfil() {
+        return escenaPerfil;
     }   
     
     public AnchorPane getMenuPane() {
@@ -392,6 +406,19 @@ public class EscenaAjustes {
     public AnchorPane getSlideMenu() {
         return slideMenu;
     }
+    
+    public TableColumn getTemperatureCol() {
+        return temperatureCol;
+    }
+
+    public TableColumn getTimeCol() {
+        return timeCol;
+    }
+
+    public TableColumn getDateCol() {
+        return dateCol;
+    }
+
     public Label getLhora() {
         return Lhora;
     }
@@ -415,6 +442,10 @@ public class EscenaAjustes {
         return Bpower;
     }
 
+    public Button getBajustes() {
+        return Bajustes;
+    }
+
     public Button getBinicio() {
         return Binicio;
     }
@@ -425,10 +456,6 @@ public class EscenaAjustes {
 
     public Button getBgrafica() {
         return Bgrafica;
-    }
-    
-    public Button getBajustes(){
-        return Bajustes;
     }
 
     public Button getBinicio2() {
@@ -445,13 +472,5 @@ public class EscenaAjustes {
 
     public Button getBajustes2() {
         return Bajustes2;
-    }
-    
-    public Button getBperfil() {
-        return Bperfil;
-    }
-
-    public Button getBperfil2() {
-        return Bperfil2;
     }
 }

@@ -141,6 +141,24 @@ public class ControladorAjustes {
 	    	Bajustes2.setStyle("-fx-background-color: #005792; -fx-background-radius: 0");
 	});
         
+        Button Bperfil = escenaAjustes.getBperfil();
+        Button Bperfil2 = escenaAjustes.getBperfil2();
+        Bperfil.setOnMouseEntered(event -> {
+            Bperfil.setStyle("-fx-background-color: #004781; -fx-background-radius: 0");
+            Bperfil2.setStyle("-fx-background-color: #004781; -fx-background-radius: 0");
+	});
+        Bperfil.setOnMouseExited(event -> {
+            Bperfil.setStyle("-fx-background-color: #005792; -fx-background-radius: 0");
+            Bperfil2.setStyle("-fx-background-color: #005792; -fx-background-radius: 0");
+	});
+        Bperfil2.setOnMouseEntered(event -> {
+            Bperfil.setStyle("-fx-background-color: #004781; -fx-background-radius: 0");
+            Bperfil2.setStyle("-fx-background-color: #004781; -fx-background-radius: 0");
+	});
+        Bperfil2.setOnMouseExited(event -> {
+            Bperfil.setStyle("-fx-background-color: #005792; -fx-background-radius: 0");
+            Bperfil2.setStyle("-fx-background-color: #005792; -fx-background-radius: 0");
+	});
 
  
         Timeline clockTimeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
@@ -195,6 +213,15 @@ public class ControladorAjustes {
         Bgrafica2.setOnMousePressed(event -> {
             cMenu.cambioDeEscena(cMenu.getEscenaGrafica());
         });
+        
+        Bperfil.setOnMousePressed(event -> {
+            cMenu.cambioDeEscena(cMenu.getEscenaPerfil());
+        });
+        Bperfil2.setOnMousePressed(event -> {
+            cMenu.cambioDeEscena(cMenu.getEscenaPerfil());
+        });
+        
+        
         
         Button BGuardarAjustes = escenaAjustes.getBGuardarAjustes();
         BGuardarAjustes.setOnMouseEntered(event -> {

@@ -16,27 +16,22 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
-import vista.EscenaGrafica;
+import vista.EscenaPerfil;
 
-public class ControladorGrafica {
+public class ControladorPerfil {
 
     ControladorMenu cMenu;
-    EscenaGrafica escenaGrafica;
+    EscenaPerfil escenaPerfil;
     
-    static final int DATA_SERIES_SIZE = 10; // Número máximo de puntos en la serie de datos
-    static final int MIN_Y_VALUE = 20;
-    static  int MAX_Y_VALUE = 50;
-    int time = 0;
-    
-    public ControladorGrafica(EscenaGrafica escenaGrafica, ControladorMenu cMenu) {
-        this.escenaGrafica = escenaGrafica;
+    public ControladorPerfil(EscenaPerfil escenaPerfil, ControladorMenu cMenu) {
+        this.escenaPerfil = escenaPerfil;
         this.cMenu = cMenu;
     }
     
     
-    public void eventoGrafica(){
+    public void eventoPerfil(){
         
-        AnchorPane slideMenu = escenaGrafica.getSlideMenu();
+        AnchorPane slideMenu = escenaPerfil.getSlideMenu();
         slideMenu.setStyle("-fx-background-color: #005792;");
         slideMenu.setPrefSize(141,440.0);
         slideMenu.setLayoutX(-124);
@@ -55,7 +50,7 @@ public class ControladorGrafica {
         
         slideMenu.setViewOrder(1);
         
-        AnchorPane menu = escenaGrafica.getMenuPane();
+        AnchorPane menu = escenaPerfil.getMenuPane();
         menu.setOnMouseEntered(event -> {
 	    	TranslateTransition slide = new TranslateTransition();
             slide.setDuration(Duration.seconds(0.4));
@@ -67,8 +62,8 @@ public class ControladorGrafica {
             slideMenu.setTranslateX(0);
 	});
         
-        Button Binicio = escenaGrafica.getBinicio();
-        Button Binicio2 = escenaGrafica.getBinicio2();
+        Button Binicio = escenaPerfil.getBinicio();
+        Button Binicio2 = escenaPerfil.getBinicio2();
         Binicio.setOnMouseEntered(event -> {
 	    	Binicio.setStyle("-fx-background-color: #004781; -fx-background-radius: 0");
 	    	Binicio2.setStyle("-fx-background-color: #004781; -fx-background-radius: 0");
@@ -86,8 +81,8 @@ public class ControladorGrafica {
 	    	Binicio2.setStyle("-fx-background-color: #005792; -fx-background-radius: 0");
 	});
         
-        Button Btabla = escenaGrafica.getBtabla();
-        Button Btabla2 = escenaGrafica.getBtabla2();
+        Button Btabla = escenaPerfil.getBtabla();
+        Button Btabla2 = escenaPerfil.getBtabla2();
         
         Btabla.setOnMouseEntered(event -> {
 	    	Btabla.setStyle("-fx-background-color: #004781; -fx-background-radius: 0");
@@ -106,8 +101,8 @@ public class ControladorGrafica {
 	    	Btabla2.setStyle("-fx-background-color: #005792; -fx-background-radius: 0");
 	});
         
-        Button Bgrafica = escenaGrafica.getBgrafica();
-        Button Bgrafica2 = escenaGrafica.getBgrafica2();
+        Button Bgrafica = escenaPerfil.getBgrafica();
+        Button Bgrafica2 = escenaPerfil.getBgrafica2();
         
         Bgrafica.setOnMouseEntered(event -> {
 	    	Bgrafica.setStyle("-fx-background-color: #004781; -fx-background-radius: 0");
@@ -126,8 +121,8 @@ public class ControladorGrafica {
 	    	Bgrafica2.setStyle("-fx-background-color: #005792; -fx-background-radius: 0");
 	});
         
-        Button Bajustes = escenaGrafica.getBajustes();
-        Button Bajustes2 = escenaGrafica.getBajustes2();
+        Button Bajustes = escenaPerfil.getBajustes();
+        Button Bajustes2 = escenaPerfil.getBajustes2();
         
         Bajustes.setOnMouseEntered(event -> {
 	    	Bajustes.setStyle("-fx-background-color: #004781; -fx-background-radius: 0");
@@ -146,24 +141,6 @@ public class ControladorGrafica {
 	    	Bajustes2.setStyle("-fx-background-color: #005792; -fx-background-radius: 0");
 	});
         
-        Button Bperfil = escenaGrafica.getBperfil();
-        Button Bperfil2 = escenaGrafica.getBperfil2();
-        Bperfil.setOnMouseEntered(event -> {
-            Bperfil.setStyle("-fx-background-color: #004781; -fx-background-radius: 0");
-            Bperfil2.setStyle("-fx-background-color: #004781; -fx-background-radius: 0");
-	});
-        Bperfil.setOnMouseExited(event -> {
-            Bperfil.setStyle("-fx-background-color: #005792; -fx-background-radius: 0");
-            Bperfil2.setStyle("-fx-background-color: #005792; -fx-background-radius: 0");
-	});
-        Bperfil2.setOnMouseEntered(event -> {
-            Bperfil.setStyle("-fx-background-color: #004781; -fx-background-radius: 0");
-            Bperfil2.setStyle("-fx-background-color: #004781; -fx-background-radius: 0");
-	});
-        Bperfil2.setOnMouseExited(event -> {
-            Bperfil.setStyle("-fx-background-color: #005792; -fx-background-radius: 0");
-            Bperfil2.setStyle("-fx-background-color: #005792; -fx-background-radius: 0");
-	});
 
  
         Timeline clockTimeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
@@ -172,7 +149,7 @@ public class ControladorGrafica {
 	clockTimeline.setCycleCount(Timeline.INDEFINITE);
         clockTimeline.play();
         
-        Button Bnoti = escenaGrafica.getBnoti();
+        Button Bnoti = escenaPerfil.getBnoti();
         Bnoti.setOnMouseEntered(event -> {
 	    	Bnoti.setStyle("-fx-background-color: #dad9d9;");
 	});
@@ -180,7 +157,7 @@ public class ControladorGrafica {
 	    	Bnoti.setStyle("-fx-background-color: white;");
 	});
         
-        Button Bconfig = escenaGrafica.getBconfig();
+        Button Bconfig = escenaPerfil.getBconfig();
         Bconfig.setOnMouseEntered(event -> {
 	    	Bconfig.setStyle("-fx-background-color: #dad9d9;");
 	});
@@ -188,7 +165,7 @@ public class ControladorGrafica {
 	    	Bconfig.setStyle("-fx-background-color: white;");
 	}); 
         
-        Button Bpower = escenaGrafica.getBpower();
+        Button Bpower = escenaPerfil.getBpower();
         Bpower.setOnMouseEntered(event -> {
 	    	Bpower.setStyle("-fx-background-color: #dad9d9;");
 	});
@@ -212,6 +189,13 @@ public class ControladorGrafica {
             cMenu.cambioDeEscena(cMenu.getEscenaTabla());
         });
         
+        Bgrafica.setOnMousePressed(event -> {
+            cMenu.cambioDeEscena(cMenu.getEscenaGrafica());
+        });
+        Bgrafica2.setOnMousePressed(event -> {
+            cMenu.cambioDeEscena(cMenu.getEscenaGrafica());
+        });
+        
         Bajustes.setOnMousePressed(event -> {
             cMenu.cambioDeEscena(cMenu.getEscenaAjustes());
         });
@@ -219,63 +203,24 @@ public class ControladorGrafica {
             cMenu.cambioDeEscena(cMenu.getEscenaAjustes());
         });
         
-        Bperfil.setOnMousePressed(event -> {
-            cMenu.cambioDeEscena(cMenu.getEscenaPerfil());
-        });
-        Bperfil2.setOnMousePressed(event -> {
-            cMenu.cambioDeEscena(cMenu.getEscenaPerfil());
-        });
-        
-        ScheduledExecutorService scheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
-        scheduledExecutorService.scheduleAtFixedRate(this::updateData, 0, 1, TimeUnit.SECONDS);
-        
-    }
-    
-    private void updateData() {
-        
-        XYChart.Series<Number, Number> dataSeries = escenaGrafica.getDataSeries();
-        NumberAxis xAxis = escenaGrafica.getxAxis();
-        NumberAxis yAxis = escenaGrafica.getyAxis();
-        // Generar un valor aleatorio en el rango [MIN_Y_VALUE, MAX_Y_VALUE]
-        double randomValue = MIN_Y_VALUE + Math.random() * (MAX_Y_VALUE - MIN_Y_VALUE);
-
-        // Actualizar los valores existentes en la serie
-        Platform.runLater(() -> {
-            // Agregar nuevo punto de datos
-            dataSeries.getData().add(new XYChart.Data<>(time, randomValue));
-            // Eliminar el punto más antiguo si la serie supera el tamaño máximo permitido
-            if (dataSeries.getData().size() > DATA_SERIES_SIZE) {
-                dataSeries.getData().remove(0);
-            }
-
-            // Actualizar valores del eje X para que se desplace de derecha a izquierda
-            
-            xAxis.setLowerBound(time - DATA_SERIES_SIZE + 1);
-            xAxis.setUpperBound(time);
-            // Incrementar el tiempo
-            time++;
-        });
     }
     public void updateClock() {
         SimpleDateFormat timeFormat = new SimpleDateFormat("hh:mm a");
         Date date = new Date();
         
-        Label Lhora = escenaGrafica.getLhora();
+        Label Lhora = escenaPerfil.getLhora();
         String formatedTime = timeFormat.format(date);
         Lhora.setText(formatedTime);
     }
     
     public void cambioIdiomas(int a){
         
-        Button Binicio2 = escenaGrafica.getBinicio2();
-        Button Btabla2 = escenaGrafica.getBtabla2();
-        Button Bgrafica2 = escenaGrafica.getBgrafica2();
-        Button Bajustes2 = escenaGrafica.getBajustes2(); 
-        Label Menu = escenaGrafica.getMenu();
-        Label bienvenida = escenaGrafica.getBienvenida();
-        LineChart<Number, Number> lineChart = escenaGrafica.getLineChart();
-        NumberAxis xAxis = escenaGrafica.getxAxis();
-        NumberAxis yAxis = escenaGrafica.getyAxis();
+        Button Binicio2 = escenaPerfil.getBinicio2();
+        Button Btabla2 = escenaPerfil.getBtabla2();
+        Button Bgrafica2 = escenaPerfil.getBgrafica2();
+        Button Bajustes2 = escenaPerfil.getBajustes2(); 
+        Label Menu = escenaPerfil.getMenu();
+        Label bienvenida = escenaPerfil.getBienvenida();
         
         switch (a) {
             case 1 -> {
@@ -285,9 +230,6 @@ public class ControladorGrafica {
                 Bajustes2.setText("SETTINGS");
                 Menu.setText("Chart");
                 bienvenida.setText("Observe their behavior.");
-                lineChart.setTitle("Temperature vs Time");
-                xAxis.setLabel("Time");
-                yAxis.setLabel("Temperature");
             }
             case 2 -> {
                 Binicio2.setText("INÍCIO");
@@ -296,9 +238,6 @@ public class ControladorGrafica {
                 Bajustes2.setText("AJUSTES");
                 Menu.setText("Gráfico");
                 bienvenida.setText("Observar o seu comportamento.");
-                lineChart.setTitle("Temperatura vs Tempo");
-                xAxis.setLabel("Tempo");
-                yAxis.setLabel("Temperatura");
             }
             default -> {
                 Binicio2.setText("INICIO");
@@ -307,9 +246,6 @@ public class ControladorGrafica {
                 Bajustes2.setText("AJUSTES");
                 Menu.setText("Grafica");
                 bienvenida.setText("Observa su comportamiento.");
-                lineChart.setTitle("Temperatura vs Tiempo");
-                xAxis.setLabel("Tiempo");
-                yAxis.setLabel("Temperatura");
             }
         }
     }

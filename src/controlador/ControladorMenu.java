@@ -2,7 +2,9 @@ package controlador;
 
 import Modelo.CargarSecciones;
 import Modelo.Medidas;
+import Modelo.Notificaciones;
 import com.sun.tools.javac.Main;
+import java.awt.AWTException;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
@@ -14,6 +16,8 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
@@ -29,12 +33,17 @@ import javafx.scene.control.Slider;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import static measurementcontrol.ControlDeMedidas.mensaje;
 import measurementcontrol.ControlDeMedidas;
 import vista.EscenaGrafica;
 import vista.EscenaTabla;
+import vista.EscenaLogin;
+import vista.EscenaRegistro;
 import vista.MenuPrincipal;
+import vista.EscenaPerfil;
 
 public class ControladorMenu {
     
@@ -48,6 +57,9 @@ public class ControladorMenu {
     private Scene escenaTabla;
     private Scene escenaGrafica;
     private Scene escenaAjustes;
+    private Scene escenaPerfil;
+    private Scene escenaLogin;
+    private Scene escenaRegistro;
     private Thread hiloGrafica;
     int time = 0;
     int TempC= 0;
@@ -69,19 +81,57 @@ public class ControladorMenu {
     
     public void eventoMenu(){
         
+        Notificaciones notificacion = new Notificaciones();
+        
+        mensaje = "Asies";
+        
         Timeline clockTimeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
 	        updateClock();
 	    }));
 	clockTimeline.setCycleCount(Timeline.INDEFINITE);
 	clockTimeline.play();
         
-        Button Bnoti = menuPrincipal.getBnoti();
+        ToggleButton Bnoti = menuPrincipal.getBnoti();
         Bnoti.setOnMouseEntered(event -> {
             Bnoti.setStyle("-fx-background-color: #dad9d9;");
         });
         Bnoti.setOnMouseExited(event -> {
             Bnoti.setStyle("-fx-background-color: white;");
         });
+        
+        Bnoti.selectedProperty().addListener((obs, oldVal, newVal) -> {
+            if (newVal) {
+                Bnoti.setGraphic(menuPrincipal.getBnotiI());
+                //menuPrincipal.getBnotiIcon().setFill(Color.rgb(255, 0, 0));
+                Bnoti.setStyle("-fx-background-color: #dad9d9;");
+                //menuPrincipal.getPnotificaciones().setLayoutY(1);
+                
+                TranslateTransition slide = new TranslateTransition();
+                slide.setDuration(Duration.seconds(0.4));
+                slide.setNode(menuPrincipal.getPnotificaciones());
+                
+                slide.setToY(200);
+                slide.play();
+                
+                menuPrincipal.getPnotificaciones().setTranslateY(1);
+                
+                
+            } 
+            else {
+                //menuPrincipal.getBnotiIcon().setFill(Color.rgb(0, 0, 0));
+                //menuPrincipal.getPnotificaciones().setLayoutY(-200);
+                Bnoti.setStyle("-fx-background-color: white;");
+                TranslateTransition slide = new TranslateTransition();
+                slide.setDuration(Duration.seconds(0.4));
+                slide.setNode(menuPrincipal.getPnotificaciones());
+                
+                slide.setToY(-200);
+                slide.play();
+                
+                menuPrincipal.getPnotificaciones().setTranslateY(-200);
+            }
+        });
+        
         
         Button Bconfig = menuPrincipal.getBconfig();
         Bconfig.setOnMouseEntered(event -> {
@@ -194,17 +244,42 @@ public class ControladorMenu {
             Bajustes2.setStyle("-fx-background-color: #005792; -fx-background-radius: 0");
 	});
         
+        Button Bperfil = menuPrincipal.getBperfil();
+        Button Bperfil2 = menuPrincipal.getBperfil2();
+        Bperfil.setOnMouseEntered(event -> {
+            Bperfil.setStyle("-fx-background-color: #004781; -fx-background-radius: 0");
+            Bperfil2.setStyle("-fx-background-color: #004781; -fx-background-radius: 0");
+	});
+        Bperfil.setOnMouseExited(event -> {
+            Bperfil.setStyle("-fx-background-color: #005792; -fx-background-radius: 0");
+            Bperfil2.setStyle("-fx-background-color: #005792; -fx-background-radius: 0");
+	});
+        Bperfil2.setOnMouseEntered(event -> {
+            Bperfil.setStyle("-fx-background-color: #004781; -fx-background-radius: 0");
+            Bperfil2.setStyle("-fx-background-color: #004781; -fx-background-radius: 0");
+	});
+        Bperfil2.setOnMouseExited(event -> {
+            Bperfil.setStyle("-fx-background-color: #005792; -fx-background-radius: 0");
+            Bperfil2.setStyle("-fx-background-color: #005792; -fx-background-radius: 0");
+	});
+        
         Slider Smotor = menuPrincipal.sMotor();
         Label LSmotor = menuPrincipal.getLsmotor();
         Smotor.valueProperty().addListener((observable, oldValue, newValue) -> {
             int nuevoValor = newValue.intValue();
             LSmotor.setText("" + nuevoValor); // Actualiza el texto del Label cuando cambia el valor del Slider
+            /*
             if (socketConnectionRef != null) {
                 String key = "M";
                 socketConnectionRef.get().sendPackage(String.valueOf("M"+nuevoValor),key);
             } else {
                 System.out.println("Error: socketConnection es null");
             }
+            */
+            Smotor.setOnMouseReleased(event -> {
+            String key = "M";
+            socketConnectionRef.get().sendPackage(String.valueOf("M"+nuevoValor),key);
+            });
         });
         
         Slider Stemp = menuPrincipal.sTemp();
@@ -220,7 +295,22 @@ public class ControladorMenu {
             }
         });
         
-        
+        Slider SVventilador = menuPrincipal.sVventilador();
+        Label LSVventilador = menuPrincipal.getLsVventilador();
+        SVventilador.valueProperty().addListener((observable, oldValue, newValue) -> {
+            int nuevoValor = newValue.intValue();
+            LSVventilador.setText("" + nuevoValor); // Actualiza el texto del Label cuando cambia el valor del Slider
+            if (socketConnectionRef != null) {
+                String key = "C";
+                socketConnectionRef.get().sendPackage(String.valueOf("C"+nuevoValor),key);
+            } else {
+                System.out.println("Error: socketConnection es null");
+            }
+        });
+                
+                
+                
+                
         AnchorPane slideMenu = menuPrincipal.getSlideMenu();
         slideMenu.setOnMouseExited(event -> {
             TranslateTransition slide = new TranslateTransition();
@@ -267,6 +357,21 @@ public class ControladorMenu {
             cambioDeEscena(getEscenaAjustes());
         });
         
+        Bperfil.setOnMousePressed(event -> {
+            cambioDeEscena(getEscenaPerfil());
+        });
+        Bperfil2.setOnMousePressed(event -> {
+            cambioDeEscena(getEscenaPerfil());
+        });
+        
+        
+        
+        Button BLogin = menuPrincipal.getBLogin();
+        BLogin.setOnMousePressed(event -> {
+            cambioDeEscena(getEscenaLogin());
+        });
+        
+        
         
         Button BCambioDePerfil  = menuPrincipal.getBCambioDePerfil();
         BCambioDePerfil.setOnMouseEntered(event -> {
@@ -299,6 +404,15 @@ public class ControladorMenu {
                 lineChart.getData().clear();
                 lineChart.getData().add(dataSeries3);
             }
+        });
+        
+        BCambioDePerfil.setOnMousePressed((t) -> {
+            try {
+                notificacion.mje();
+            } catch (AWTException ex) {
+                Logger.getLogger(ControlDeMedidas.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            Bnoti.setGraphic(menuPrincipal.getBnotiI_2());
         });
        
         loadData();
@@ -590,6 +704,19 @@ public class ControladorMenu {
     public void inicializarEscenaAjustes(Scene escenaAjustes) {
         this.escenaAjustes = escenaAjustes;
     }
+    
+    public void inicializarEscenaPerfil(Scene escenaPerfil) {
+        this.escenaPerfil = escenaPerfil;
+    }
+    
+    public void inicializarEscenaLogin(Scene escenaLogin) {
+        this.escenaLogin = escenaLogin;
+    }
+    
+    public void inicializarEscenaRegistro(Scene escenaRegistro) {
+        this.escenaRegistro = escenaRegistro;
+    }
+    
     public Scene getEscenaPrincipal() {
         return escenaPrincipal;
     }
@@ -601,6 +728,15 @@ public class ControladorMenu {
     }
     public Scene getEscenaAjustes() {
         return escenaAjustes;
+    }
+    public Scene getEscenaPerfil() {
+        return escenaPerfil;
+    }
+    public Scene getEscenaLogin() {
+        return escenaLogin;
+    }
+    public Scene getEscenaRegistro() {
+        return escenaRegistro;
     }
     
     
