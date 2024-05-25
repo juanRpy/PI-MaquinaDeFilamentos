@@ -15,7 +15,7 @@ public class ConexionBaseDeDatos {
     public Connection getConexion() {
 
         try {
-            conexion = DriverManager.getConnection("jdbc:mysql://localhost:3305/filamentmachine_db", "root", "7492");
+            conexion = DriverManager.getConnection("jdbc:mysql://localhost:3307/filamentmachine_db", "root", "");
         } catch (SQLException e) {
             e.printStackTrace();
         }

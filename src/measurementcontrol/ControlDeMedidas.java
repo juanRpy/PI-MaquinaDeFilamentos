@@ -12,6 +12,7 @@ import vista.EscenaTabla;
 import controlador.ControladorMenu;
 import controlador.ControladorTabla;
 import controlador.ControladorPerfil;
+import controlador.ControladorLogin;
 import static javafx.application.Application.launch;
 import javafx.scene.image.Image;
 import vista.EscenaAjustes;
@@ -20,6 +21,9 @@ import vista.EscenaPerfil;
 import vista.EscenaLogin;
 import vista.EscenaRegistro;
 import Modelo.Notificaciones;
+import controlador.ControladorLogin;
+import controlador.ControladorRegistro;
+import javafx.application.Platform;
 
 public class ControlDeMedidas extends Application{
     
@@ -28,7 +32,7 @@ public class ControlDeMedidas extends Application{
     public static String mensaje;
     
     @Override
-    public void start(Stage escena) {
+    public void start(Stage escena) throws Exception{
         Image icon = new Image(getClass().getResourceAsStream("/imagenes/LogoPrincipal.jpeg"));
         escena.getIcons().add(icon);
         
@@ -37,7 +41,8 @@ public class ControlDeMedidas extends Application{
         EscenaGrafica escenaGrafica = new EscenaGrafica();
         EscenaAjustes escenaAjustes = new EscenaAjustes();
         EscenaPerfil escenaPerfil = new EscenaPerfil();
-        
+        EscenaLogin escenaLogin = new EscenaLogin();
+        EscenaRegistro escenaRegistro = new EscenaRegistro();
         
         conexionSocket =  new ConexionSocket();
         loadSection = new CargarSecciones();
@@ -47,9 +52,8 @@ public class ControlDeMedidas extends Application{
         ControladorTabla cTabla = new ControladorTabla(escenaTabla, cMenu); 
         ControladorAjustes cAjustes = new ControladorAjustes(escenaAjustes, cMenu, cTabla,cGrafica);
         ControladorPerfil cPerfil = new ControladorPerfil(escenaPerfil, cMenu);
-        
-        EscenaLogin escenaLogin = new EscenaLogin(cMenu);
-        EscenaRegistro escenaRegistro = new EscenaRegistro(cMenu);
+        ControladorLogin cLogin = new ControladorLogin(escenaLogin,cMenu);
+        ControladorRegistro cRegistro = new ControladorRegistro(escenaRegistro,cMenu);
         
         cMenu.inicializarEscenaTabla(escenaTabla.getEscenaTabla());
         cMenu.inicializarEscenaPrincipal(menu.getEscenaPrincipal());
@@ -64,11 +68,25 @@ public class ControlDeMedidas extends Application{
         cGrafica.eventoGrafica();
         cAjustes.eventoAjustes();
         cPerfil.eventoPerfil();
+        cLogin.eventoLogin();
+        cRegistro.eventoRegistro();
         
 
-        escena.setScene(menu.getEscenaPrincipal());
+        escena.setScene(escenaLogin.getEscenaLogin());
         escena.setTitle("Estación de monitoreo y control");
+        escena.setOnCloseRequest(event -> {
+            handleExit();
+        });
         escena.show(); 
+    }
+    
+    private void handleExit() {
+
+        // Ensure JavaFX application exits
+        Platform.exit();
+        
+        // Exit the JVM
+        System.exit(0);
     }
     
      @Override

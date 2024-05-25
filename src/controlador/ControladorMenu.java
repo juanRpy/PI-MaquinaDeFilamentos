@@ -4,6 +4,9 @@ import Modelo.CargarSecciones;
 import Modelo.Medidas;
 import Modelo.Notificaciones;
 import com.sun.tools.javac.Main;
+import static controlador.ControladorGrafica.DATA_SERIES_SIZE;
+import static controlador.ControladorGrafica.MAX_Y_VALUE;
+import static controlador.ControladorGrafica.MIN_Y_VALUE;
 import java.awt.AWTException;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -48,7 +51,10 @@ import vista.EscenaPerfil;
 public class ControladorMenu {
     
     ControlDeMedidas cM;
+    ControladorTabla controladorTabla;
     MenuPrincipal menuPrincipal;
+    int b = 0;
+    
     EscenaTabla tabla;
     EscenaGrafica grafica;
     private Medidas medida;
@@ -67,8 +73,8 @@ public class ControladorMenu {
     private Thread serverThread;
     private AtomicReference<ConexionSocket> socketConnectionRef = new AtomicReference<>();
     static final int DATA_SERIES_SIZE = 10; // Número máximo de puntos en la serie de datos
-    static final int MIN_Y_VALUE = 20;
-    static  int MAX_Y_VALUE = 50;
+    static final int MIN_Y_VALUE = 340;
+    static  int MAX_Y_VALUE = 360;
     
     
     
@@ -80,6 +86,7 @@ public class ControladorMenu {
 
     
     public void eventoMenu(){
+        
         
         Notificaciones notificacion = new Notificaciones();
         
@@ -390,7 +397,6 @@ public class ControladorMenu {
         XYChart.Series<Number, Number> dataSeries = menuPrincipal.getDataSeries();
         XYChart.Series<Number, Number> dataSeries2 = menuPrincipal.getDataSeries2();
         XYChart.Series<Number, Number> dataSeries3 = menuPrincipal.getDataSeries3();
-        
         cambioPerfil.setOnAction((t) -> {
             int index = cambioPerfil.getSelectionModel().getSelectedIndex();
 
@@ -418,7 +424,7 @@ public class ControladorMenu {
             }
             Bnoti.setGraphic(menuPrincipal.getBnotiI_2());
         });
-       
+        
         loadData();
         
         ScheduledExecutorService scheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
@@ -499,21 +505,17 @@ public class ControladorMenu {
                 NumberAxis xAxis = menuPrincipal.getxAxis();
                 NumberAxis yAxis = menuPrincipal.getyAxis();
 
-                //double randomValue = MIN_Y_VALUE + Math.random() * (MAX_Y_VALUE - MIN_Y_VALUE);
-                String vTemperatura = menuPrincipal.getLtemp().getText();
+                double randomValue = MIN_Y_VALUE + Math.random() * (MAX_Y_VALUE - MIN_Y_VALUE);
                 String vTiempo= menuPrincipal.getLtiempo().getText();
                 double randomValue2 = 50+MIN_Y_VALUE + Math.random() * (MAX_Y_VALUE - MIN_Y_VALUE);
                 double randomValue3 = 100+MIN_Y_VALUE + Math.random() * (MAX_Y_VALUE - MIN_Y_VALUE);
 
-                if (!vTemperatura.isEmpty()) {
                     try {
                         // Convertir la cadena de tiempo a un número
-                        double temperatura = Double.parseDouble(vTemperatura);
-                        double tiempo = Double.parseDouble(vTiempo);
                         // Actualizar los valores existentes en la serie
                         Platform.runLater(() -> {
                             // Agregar nuevo punto de datos
-                            dataSeries.getData().add(new XYChart.Data<>(tiempo, temperatura));
+                            dataSeries.getData().add(new XYChart.Data<>(time, randomValue));
                             dataSeries2.getData().add(new XYChart.Data<>(time, randomValue2));
                             dataSeries3.getData().add(new XYChart.Data<>(time, randomValue3));
 
@@ -528,13 +530,13 @@ public class ControladorMenu {
                                 dataSeries3.getData().remove(0);
                             }
 
-                            cambioPerfiles(temperatura);
+                            cambioPerfiles(randomValue);
                             //Ltemp.setText(String.valueOf(randomValue));
 
 
 
                             if(Cperfil == 0){
-                                cambioPerfiles(temperatura);
+                                cambioPerfiles(randomValue);
                             }
                             if(Cperfil == 1){
                                 cambioPerfiles(randomValue2);
@@ -542,25 +544,53 @@ public class ControladorMenu {
                             if(Cperfil == 2){
                                 cambioPerfiles(randomValue3);
                             }
+                            
                             // Actualizar valores del eje X para que se desplace de derecha a izquierda
-
-                            xAxis.setLowerBound(tiempo - DATA_SERIES_SIZE + 1);
-                            xAxis.setUpperBound(tiempo);
+                            menuPrincipal.getLtiempo().setText(Integer.toString(time));
+                            xAxis.setLowerBound(time - DATA_SERIES_SIZE + 1);
+                            xAxis.setUpperBound(time);
                             // Incrementar el tiempo
                             time++;
+                            
                         });
                     } catch (NumberFormatException e) {
                         // Manejar la excepción para la conversión, si es necesario
                         e.printStackTrace();
                     }
-                } else {
-                    // Manejar el caso donde la cadena de tiempo está vacía
-                }
+               
                 // Actualizar los valores existentes en la serie
             });
             hiloGrafica.setDaemon(true);
             hiloGrafica.start();
     }
+    
+    /*
+    private void updateData() {
+        
+        XYChart.Series<Number, Number> dataSeries = menuPrincipal.getDataSeries();
+        NumberAxis xAxis = menuPrincipal.getxAxis();
+        NumberAxis yAxis = menuPrincipal.getyAxis();
+        // Generar un valor aleatorio en el rango [MIN_Y_VALUE, MAX_Y_VALUE]
+        double randomValue = MIN_Y_VALUE + Math.random() * (MAX_Y_VALUE - MIN_Y_VALUE);
+
+        // Actualizar los valores existentes en la serie
+        Platform.runLater(() -> {
+            // Agregar nuevo punto de datos
+            dataSeries.getData().add(new XYChart.Data<>(time, randomValue));
+            // Eliminar el punto más antiguo si la serie supera el tamaño máximo permitido
+            if (dataSeries.getData().size() > DATA_SERIES_SIZE) {
+                dataSeries.getData().remove(0);
+            }
+
+            // Actualizar valores del eje X para que se desplace de derecha a izquierda
+            
+            xAxis.setLowerBound(time - DATA_SERIES_SIZE + 1);
+            xAxis.setUpperBound(time);
+            // Incrementar el tiempo
+            time++;
+        });
+    }
+    */
     
     private void cambioPerfiles(double rV){
         ComboBox cambioPerfil = menuPrincipal.getCambioDePerfil();
@@ -684,6 +714,31 @@ public class ControladorMenu {
                 yAxis.setLabel("Temperatura");
             }
         }
+    }
+    
+    public void modoNoche(int a){
+        //escenaAjustes.getModoNoche().selectedProperty().addListener((obs, oldVal, newVal) -> {
+        controladorTabla = new ControladorTabla(tabla,this);
+        //controladorTabla.modoNoche();
+        tabla = new EscenaTabla();
+        if (a == 1) {
+            menuPrincipal.getanchorPane().setStyle("-fx-background-color: #111111;");
+            menuPrincipal.getPane().setStyle("-fx-background-color: #1F1F1F;");
+            menuPrincipal.getBienvenida().setTextFill(Color.WHITE);
+            menuPrincipal.getLhora().setTextFill(Color.WHITE);
+            b=0;
+        }else{
+            menuPrincipal.getanchorPane().setStyle("-fx-background-color: white;");
+            menuPrincipal.getPane().setStyle("-fx-background-color: white;");
+            menuPrincipal.getBienvenida().setTextFill(Color.BLACK);
+            menuPrincipal.getLhora().setTextFill(Color.BLACK);
+            b=1;
+        }
+        //});
+    }
+    
+    public int ModoN(){
+        return b;
     }
     
     public void cambioDeEscena(Scene scene) {

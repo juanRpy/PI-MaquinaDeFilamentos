@@ -19,6 +19,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
@@ -26,12 +27,14 @@ import javafx.util.Duration;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import vista.EscenaAjustes;
 import vista.EscenaTabla;
 import vista.MenuPrincipal;
 
 public class ControladorTabla {
     
     EscenaTabla escenaTabla;
+    EscenaAjustes escenaAjustes;
     ControladorMenu cMenu;
     private Thread tableThread;
     private Thread excelThread;
@@ -260,7 +263,6 @@ public class ControladorTabla {
         });
         
         loadColumn();
-        
     }
     
     private void loadColumn() {
@@ -375,6 +377,43 @@ public class ControladorTabla {
             }
         }
     }
+    /*
+    public void modoNoche(){
+        int a = cMenu.ModoN();
+        if (cMenu.ModoN()==1) {
+            escenaTabla.getAnchorPane2().setStyle("-fx-background-color: #111111;");
+            escenaTabla.getMenu().setStyle("-fx-background-color: #1F1F1F;");
+            escenaTabla.getSlideMenu().setStyle("-fx-background-color: #1F1F1F;");
+            escenaTabla.getBinicio().setStyle("-fx-background-color: #1F1F1F;");
+            escenaTabla.getBtabla().setStyle("-fx-background-color: #1F1F1F;");
+            escenaTabla.getBgrafica().setStyle("-fx-background-color: #1F1F1F;");
+            escenaTabla.getBajustes().setStyle("-fx-background-color: #1F1F1F;");
+            escenaTabla.getBinicio2().setStyle("-fx-background-color: #1F1F1F;");
+            escenaTabla.getBtabla2().setStyle("-fx-background-color: #1F1F1F;");
+            escenaTabla.getBgrafica2().setStyle("-fx-background-color: #1F1F1F;");
+            escenaTabla.getBajustes2().setStyle("-fx-background-color: #1F1F1F;");
+
+            
+
+        } 
+        else {
+            escenaTabla.getAnchorPane2().setStyle("-fx-background-color: white;");
+            escenaTabla.getMenu().setStyle("-fx-background-color: #005792;");
+            escenaTabla.getSlideMenu().setStyle("-fx-background-color: #005792;");
+            escenaTabla.getBinicio().setStyle("-fx-background-color: #005792;");
+            escenaTabla.getBtabla().setStyle("-fx-background-color: #005792;");
+            escenaTabla.getBgrafica().setStyle("-fx-background-color: #005792;");
+            escenaTabla.getBajustes().setStyle("-fx-background-color: #005792;");
+            escenaTabla.getBinicio2().setStyle("-fx-background-color: #005792;");
+            escenaTabla.getBtabla2().setStyle("-fx-background-color: #005792;");
+            escenaTabla.getBgrafica2().setStyle("-fx-background-color: #005792;");
+            escenaTabla.getBajustes2().setStyle("-fx-background-color: #005792;");
+            escenaTabla.getLhora().setTextFill(Color.BLACK);
+            
+        }
+        
+    }
+    */
     
     public AnchorPane getLayout() {
         return escenaTabla.getAnchorPane2();

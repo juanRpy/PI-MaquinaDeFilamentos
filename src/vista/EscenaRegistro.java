@@ -27,6 +27,10 @@ import Modelo.Registros;
 import java.time.LocalDateTime;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 /**
  *
@@ -45,8 +49,7 @@ public class EscenaRegistro {
     MenuPrincipal menuPrincipal;
     ControladorMenu controladorMenu;
     
-    public EscenaRegistro(ControladorMenu controladorMenu) {
-        this.controladorMenu = controladorMenu;
+    public EscenaRegistro() {
         loginGUI();
     }
     
@@ -56,38 +59,42 @@ public class EscenaRegistro {
         anchorPaneRegistro.setStyle("-fx-background-color: white;-fx-background-radius: 10");
         escenaRegistro = new Scene(anchorPaneRegistro);
         
-        BLogin = new Button();
-        BLogin.setLayoutX(6);
-        BLogin.setLayoutY(343);
-        BLogin.setPrefSize(40, 27);
+        BLogin = new Button("Volver");
+        BLogin.setLayoutX(185);
+        BLogin.setLayoutY(383);
+        BLogin.setPrefSize(70, 27);
         
+        Image LogoI = new Image("Imagenes/LOGO.png");
+        ImageView LogoImage = new ImageView();
+        LogoImage.setImage(LogoI);
+        LogoImage.setLayoutX(100);
+        LogoImage.setLayoutY(140);
+        LogoImage.setFitWidth(180);
+        LogoImage.setFitHeight(180);
         
-        BLogin.setOnMousePressed(event -> {
-            controladorMenu.cambioDeEscena(controladorMenu.getEscenaPrincipal());
-        });
         
         Label IniciarSL = new Label("REGISTRARSE");
-        IniciarSL.setLayoutX(111);
+        IniciarSL.setLayoutX(123);
         IniciarSL.setLayoutY(54);
         IniciarSL.setFont(Font.font("Verdana",25));
         
         Label NombreL = new Label("Nombre:");
-        NombreL.setLayoutX(55);
+        NombreL.setLayoutX(135);
         NombreL.setLayoutY(124);
         NombreL.setFont(Font.font("Verdana",15));
         
         NombreTF = new TextField();
-        NombreTF.setLayoutX(55);
+        NombreTF.setLayoutX(135);
         NombreTF.setLayoutY(152);
         NombreTF.setPrefSize(156, 25);
         
         Label UsuarioL = new Label("Usuario:");
-        UsuarioL.setLayoutX(55);
+        UsuarioL.setLayoutX(135);
         UsuarioL.setLayoutY(191);
         UsuarioL.setFont(Font.font("Verdana",15));
         
         UsuarioTF = new TextField();
-        UsuarioTF.setLayoutX(55);
+        UsuarioTF.setLayoutX(135);
         UsuarioTF.setLayoutY(219);
         UsuarioTF.setPrefSize(156, 25);
         
@@ -104,12 +111,12 @@ public class EscenaRegistro {
         
         
         Label ContraseñaL = new Label("Contraseña:");
-        ContraseñaL.setLayoutX(55);
+        ContraseñaL.setLayoutX(135);
         ContraseñaL.setLayoutY(258);
         ContraseñaL.setFont(Font.font("Verdana",15));
         
         ContraseñaPF = new PasswordField();
-        ContraseñaPF.setLayoutX(55);
+        ContraseñaPF.setLayoutX(135);
         ContraseñaPF.setLayoutY(285);
         ContraseñaPF.setPrefSize(156, 25);
         
@@ -124,7 +131,7 @@ public class EscenaRegistro {
         
         
         ContraseñaTF = new TextField();
-        ContraseñaTF.setLayoutX(55);
+        ContraseñaTF.setLayoutX(135);
         ContraseñaTF.setLayoutY(285);
         ContraseñaTF.setPrefSize(156, 25);
         
@@ -152,8 +159,10 @@ public class EscenaRegistro {
         PaneImg.setStyle("-fx-background-color: darkblue;");
         
         
+        PaneImg.getChildren().addAll(LogoImage);
+        
         Button RegistrarseB = new Button("Registrarse");
-        RegistrarseB.setLayoutX(94);
+        RegistrarseB.setLayoutX(174);
         RegistrarseB.setLayoutY(342);
         RegistrarseB.setPrefSize(91, 25);
         
@@ -162,7 +171,7 @@ public class EscenaRegistro {
         });
         
         ToggleButton VerContraseñaB = new ToggleButton();
-        VerContraseñaB.setLayoutX(183);
+        VerContraseñaB.setLayoutX(263);
         VerContraseñaB.setLayoutY(286);
         VerContraseñaB.setStyle("-fx-background-color:  TRANSPARENT;");
         VerContraseñaB.setCursor(Cursor.HAND);
@@ -192,6 +201,7 @@ public class EscenaRegistro {
                ContraseñaTF.setVisible(true);
                ContraseñaPF.setManaged(false);
                ContraseñaPF.setVisible(false);
+               
             }
             else{
                VerContraseñaB.setGraphic(VerContraseñaFA2);
@@ -222,15 +232,28 @@ public class EscenaRegistro {
                 registros.setPin(pin);
                 registros.setFecha(fecha);
                 cargarRegistros.crear(registros);
+                NombreTF.setText("");
+                UsuarioTF.setText("");
+                ContraseñaTF.setText("");
+                ContraseñaPF.setText("");
             } catch (NumberFormatException e) {
                 e.printStackTrace(); 
             }
         } else {
+            showErrorDialog("Datos incompletos", "Ingresa todos los datos para crear tu cuenta");
             // Manejar el caso en que una de las cadenas está vacía
         }
     }
     
     
+    
+    private void showErrorDialog(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    } 
     
     public String getNombreTF() {
         return NombreTF.getText();
@@ -243,6 +266,11 @@ public class EscenaRegistro {
     public String getContraseñaTF() {
         return ContraseñaTF.getText();
     }
+    
+    public Button getBLogin(){
+        return BLogin;
+    }
+    
     
     
     public Scene getEscenaRegistro() {

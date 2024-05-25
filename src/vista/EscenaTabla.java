@@ -53,7 +53,7 @@ public class EscenaTabla {
     }
     
     public void tablaGUI(){
-        AnchorPane anchorPane2 = new AnchorPane();
+        anchorPane2 = new AnchorPane();
         anchorPane2.setPrefSize(800, 440);
         anchorPane2.setStyle("-fx-background-color: white;-fx-background-radius: 10");
         escenaTabla = new Scene(anchorPane2);

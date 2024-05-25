@@ -64,10 +64,11 @@ public class MenuPrincipal {
     private Slider Stemp;
     private Slider SVventilador;
     private ComboBox CambioDePerfil;
+    private Pane pane;
     
     static final int DATA_SERIES_SIZE = 100; // Número máximo de puntos en la serie de datos
-    static final int MIN_Y_VALUE = 20;
-    static  int MAX_Y_VALUE = 50;
+    static final int MIN_Y_VALUE = 300;
+    static  int MAX_Y_VALUE = 400;
    
     
     private XYChart.Series<Number, Number> dataSeries = new XYChart.Series<>();
@@ -177,7 +178,7 @@ public class MenuPrincipal {
         });
 
 
-        Pane pane = new Pane();
+        pane = new Pane();
         pane.setLayoutX(546);
         pane.setLayoutY(-10);
         pane.setPrefSize(253, 626);
@@ -386,7 +387,7 @@ public class MenuPrincipal {
         lineChart.setHorizontalGridLinesVisible(false);
         lineChart.setVerticalGridLinesVisible(false);
         lineChart.setStyle("-fx-background-color: white;-fx-background-radius: 10");
-
+        lineChart.getData().add(dataSeries);
         yAxis.setAnimated(false);
         yAxis.setAutoRanging(false);
         yAxis.setTickUnit(25);
@@ -397,7 +398,7 @@ public class MenuPrincipal {
         xAxis.setTickUnit(1);
         xAxis.setLowerBound(0);
         xAxis.setUpperBound(DATA_SERIES_SIZE - 1);
-        lineChart.getData().add(dataSeries);
+        
         
         CambioDePerfil = new ComboBox();
         CambioDePerfil.setLayoutX(440);
@@ -421,7 +422,7 @@ public class MenuPrincipal {
         
         
 
-        anchorPane.getChildren().addAll(Ptiempo,Ptemp,bienvenida,Menu,separador2,CambioDePerfil, BCambioDePerfil);
+        anchorPane.getChildren().addAll(Ptiempo,Ptemp,bienvenida,Menu,separador2);
 
         //Sector Izquierdo
         slideMenu = new AnchorPane();
@@ -607,7 +608,18 @@ public class MenuPrincipal {
         anchorPane.getChildren().addAll(menu,slideMenu, lineChart, pane,Pnotificaciones,BLogin);
     }
     
+    public AnchorPane getanchorPane(){
+        return anchorPane;
+    }
+    
+    public Pane getPane(){
+        return pane;
+    }
 
+    public LineChart getlineChart(){
+        return lineChart;
+    }
+    
     public Label getLabel() {
         return label;
     }

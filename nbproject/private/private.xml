@@ -28,6 +28,7 @@
             <file>file:/C:/Users/josec/OneDrive/Documentos/NetBeansProjects/PI-MaquinaDeFilamentos/src/controlador/ControladorTabla.java</file>
             <file>file:/C:/Users/josec/OneDrive/Documentos/NetBeansProjects/PI-MaquinaDeFilamentos/src/Modelo/Medidas.java</file>
             <file>file:/C:/Users/josec/OneDrive/Documentos/NetBeansProjects/PI-MaquinaDeFilamentos/src/Modelo/Registros.java</file>
+            <file>file:/C:/Users/josec/OneDrive/Documentos/NetBeansProjects/PI-MaquinaDeFilamentos/src/controlador/ControladorRegistro.java</file>
             <file>file:/C:/Users/josec/OneDrive/Documentos/NetBeansProjects/PI-MaquinaDeFilamentos/src/vista/EscenaRegistro.java</file>
             <file>file:/C:/Users/josec/OneDrive/Documentos/NetBeansProjects/PI-MaquinaDeFilamentos/src/Modelo/Notificaciones.java</file>
             <file>file:/C:/Users/josec/OneDrive/Documentos/NetBeansProjects/PI-MaquinaDeFilamentos/src/controlador/ControladorGrafica.java</file>
@@ -42,6 +43,7 @@
             <file>file:/C:/Users/josec/OneDrive/Documentos/NetBeansProjects/PI-MaquinaDeFilamentos/src/Modelo/CargarRegistros.java</file>
             <file>file:/C:/Users/josec/OneDrive/Documentos/NetBeansProjects/PI-MaquinaDeFilamentos/src/Modelo/CargarSecciones.java</file>
             <file>file:/C:/Users/josec/OneDrive/Documentos/NetBeansProjects/PI-MaquinaDeFilamentos/src/controlador/ConexionSocket.java</file>
+            <file>file:/C:/Users/josec/OneDrive/Documentos/NetBeansProjects/PI-MaquinaDeFilamentos/src/controlador/ControladorLogin.java</file>
         </group>
     </open-files>
 </project-private>

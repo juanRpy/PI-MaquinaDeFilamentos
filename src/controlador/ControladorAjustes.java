@@ -12,6 +12,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
 import vista.EscenaAjustes;
+import vista.EscenaTabla;
 
 
 public class ControladorAjustes {
@@ -20,6 +21,7 @@ public class ControladorAjustes {
     ControladorTabla cTabla;
     ControladorGrafica cGrafica;
     EscenaAjustes escenaAjustes;
+    EscenaTabla escenaTabla;
     
     
     public ControladorAjustes(EscenaAjustes escenaAjustes,ControladorMenu cMenu, ControladorTabla cTabla, ControladorGrafica cGrafica){
@@ -319,10 +321,11 @@ public class ControladorAjustes {
         
     }
     
-    private void modoNoche(){
+    public void modoNoche(){
         escenaAjustes.getModoNoche().selectedProperty().addListener((obs, oldVal, newVal) -> {
             if (newVal) {
                 escenaAjustes.getanchorPane4().setStyle("-fx-background-color: #111111;");
+                /*
                 escenaAjustes.getmenu().setStyle("-fx-background-color: #1F1F1F;");
                 escenaAjustes.getslideMenu().setStyle("-fx-background-color: #1F1F1F;");
                 escenaAjustes.getBinicio().setStyle("-fx-background-color: #1F1F1F;");
@@ -333,21 +336,26 @@ public class ControladorAjustes {
                 escenaAjustes.getBtabla2().setStyle("-fx-background-color: #1F1F1F;");
                 escenaAjustes.getBgrafica2().setStyle("-fx-background-color: #1F1F1F;");
                 escenaAjustes.getBajustes2().setStyle("-fx-background-color: #1F1F1F;");
+                */
                 escenaAjustes.getLModoNoche().setTextFill(Color.WHITE);
                 escenaAjustes.getbienvenida().setTextFill(Color.WHITE);
                 escenaAjustes.getLhora().setTextFill(Color.WHITE);
                 escenaAjustes.getLEscalaTemp().setTextFill(Color.WHITE);
                 escenaAjustes.getLCambioIdiomas().setTextFill(Color.WHITE);
+                
+                
+                
+                cMenu.modoNoche(1);
+                        
+                
                 /*
-                
-                
-                
                 main.ModoNoche(true);
                 */
                 
             } 
             else {
                 escenaAjustes.getanchorPane4().setStyle("-fx-background-color: white;");
+                /*
                 escenaAjustes.getmenu().setStyle("-fx-background-color: #005792;");
                 escenaAjustes.getslideMenu().setStyle("-fx-background-color: #005792;");
                 escenaAjustes.getBinicio().setStyle("-fx-background-color: #005792;");
@@ -358,11 +366,14 @@ public class ControladorAjustes {
                 escenaAjustes.getBtabla2().setStyle("-fx-background-color: #005792;");
                 escenaAjustes.getBgrafica2().setStyle("-fx-background-color: #005792;");
                 escenaAjustes.getBajustes2().setStyle("-fx-background-color: #005792;");
+                */
                 escenaAjustes.getLModoNoche().setTextFill(Color.BLACK);
                 escenaAjustes.getbienvenida().setTextFill(Color.BLACK);
                 escenaAjustes.getLhora().setTextFill(Color.BLACK);
                 escenaAjustes.getLEscalaTemp().setTextFill(Color.BLACK);
                 escenaAjustes.getLCambioIdiomas().setTextFill(Color.BLACK);
+                
+                cMenu.modoNoche(0);
                 /*
                 LModoNoche.setTextFill(Color.BLACK);
                 bienvenida.setTextFill(Color.BLACK);
