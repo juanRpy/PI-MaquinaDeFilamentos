@@ -151,12 +151,16 @@ public class ControladorMenu {
         });
         
         Bpower.setOnAction((t) -> {
-            String packageData = "PULSO";
-            if (socketConnectionRef != null) {
+            String packageData = "";
+            if (socketConnectionRef != null && Bpower.isSelected()) {
                 String key = "O";
+                packageData = "ON";
                 socketConnectionRef.get().sendPackage(packageData,key);
-            } else {
-                System.out.println("Error: socketConnection es null");
+            }
+            if (socketConnectionRef != null && !Bpower.isSelected()) {
+                String key = "O";
+                packageData = "OFF";
+                socketConnectionRef.get().sendPackage(packageData,key);
             }
         });
 
