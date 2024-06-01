@@ -272,7 +272,7 @@ public class EscenaAjustes {
         //Cambiar Medida de Temperatura
         LEscalaTemp = new Label();
         LEscalaTemp.setLayoutX(110);
-        LEscalaTemp.setLayoutY(200);
+        LEscalaTemp.setLayoutY(150);
         LEscalaTemp.setPrefSize(200, 27);
         LEscalaTemp.setText("Escalas de temperatura");
         LEscalaTemp.setFont(new Font("Verdana", 14));
@@ -280,11 +280,11 @@ public class EscenaAjustes {
         
         EscalaTemp = new ComboBox();
         EscalaTemp.setLayoutX(300);
-        EscalaTemp.setLayoutY(202);
+        EscalaTemp.setLayoutY(152);
         EscalaTemp.setPromptText("Escalas");
         
         EscalaTemp.getItems().add(0,"Celsius");
-        EscalaTemp.getItems().add(1,"Farenheit");
+        EscalaTemp.getItems().add(1,"Fahrenheit");
         EscalaTemp.getItems().add(2,"Kelvin");
         
         
@@ -292,7 +292,7 @@ public class EscenaAjustes {
         //Cambiar Idioma
         LCambioIdiomas = new Label();
         LCambioIdiomas.setLayoutX(110);
-        LCambioIdiomas.setLayoutY(250);
+        LCambioIdiomas.setLayoutY(220);
         LCambioIdiomas.setPrefSize(200, 27);
         LCambioIdiomas.setText("Cambiar idioma");
         LCambioIdiomas.setFont(new Font("Verdana", 14));
@@ -300,7 +300,7 @@ public class EscenaAjustes {
         
         CambioIdiomas = new ComboBox();
         CambioIdiomas.setLayoutX(300);
-        CambioIdiomas.setLayoutY(252);
+        CambioIdiomas.setLayoutY(222);
         CambioIdiomas.setPromptText("Idiomas");
         
         CambioIdiomas.getItems().add(0,"Español");
@@ -311,14 +311,14 @@ public class EscenaAjustes {
         //Modo Noche
         LModoNoche = new Label();
         LModoNoche.setLayoutX(110);
-        LModoNoche.setLayoutY(300);
+        LModoNoche.setLayoutY(290);
         LModoNoche.setPrefSize(150, 27);
         LModoNoche.setText("Modo noche");
         LModoNoche.setFont(new Font("Verdana", 14));
         
         ModoNoche = new ToggleSwitch();
         ModoNoche.setLayoutX(300);
-        ModoNoche.setLayoutY(305);
+        ModoNoche.setLayoutY(295);
         
         
         BGuardarAjustes = new Button();

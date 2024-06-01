@@ -24,8 +24,8 @@ public class ControladorGrafica {
     EscenaGrafica escenaGrafica;
     
     static final int DATA_SERIES_SIZE = 10; // Número máximo de puntos en la serie de datos
-    static final int MIN_Y_VALUE = 20;
-    static  int MAX_Y_VALUE = 50;
+    static final int MIN_Y_VALUE = 340;
+    static  int MAX_Y_VALUE = 360;
     int time = 0;
     
     public ControladorGrafica(EscenaGrafica escenaGrafica, ControladorMenu cMenu) {

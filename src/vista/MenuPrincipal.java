@@ -33,6 +33,10 @@ public class MenuPrincipal {
     private FontAwesomeIconView BnotiIcon;
     private ImageView BnotiI_2;
     private ImageView BnotiI;
+    private ImageView ConexionI;
+    private ImageView ConexionI_2;
+    private Image ConexionI1;
+    private Image ConexionI2;
     private Pane Pnotificaciones;
     private Button Bconfig;
     private ToggleButton Bpower;
@@ -53,6 +57,7 @@ public class MenuPrincipal {
     private Label label;
     private Label label2;
     private Label Lhora;
+    private Label LConexion;
     private Label Ltemp;
     private Label Ltemp2;
     private Label Ltiempo;
@@ -94,6 +99,20 @@ public class MenuPrincipal {
         Lhora = new Label();
         Lhora.setLayoutX(46);
         Lhora.setLayoutY(17);
+        
+        //Label de conexión de la ESP
+        LConexion = new Label("Desconectado");
+        LConexion.setLayoutX(460);
+        LConexion.setLayoutY(14);
+        
+        ConexionI1 = new Image("Imagenes/Conectado.png");
+        ConexionI2 = new Image("Imagenes/Desconectado.png");
+        ConexionI = new ImageView();
+        ConexionI.setImage(ConexionI2);
+        ConexionI.setLayoutX(430);
+        ConexionI.setLayoutY(12);
+        
+        
         
         
         //Separador
@@ -605,7 +624,7 @@ public class MenuPrincipal {
         Ptiempo.getChildren().addAll(fontAwesomeIconView1);
         Ptemp.getChildren().addAll(fontAwesomeIconView2);
 
-        anchorPane.getChildren().addAll(menu,slideMenu, lineChart, pane,Pnotificaciones,BLogin);
+        anchorPane.getChildren().addAll(menu,slideMenu, lineChart, pane,Pnotificaciones, LConexion,ConexionI);
     }
     
     public AnchorPane getanchorPane(){
@@ -668,12 +687,28 @@ public class MenuPrincipal {
         return LSVventilador;
     }
     
+    public Label getLConexion(){
+        return LConexion;
+    }
+    
     public ToggleButton getBnoti() {
         return Bnoti;
     }
     
     public FontAwesomeIconView getBnotiIcon() {
         return BnotiIcon;
+    }
+    
+    public Image getConexionI1() {
+        return ConexionI1;
+    }
+    
+    public Image getConexionI2() {
+        return ConexionI2;
+    }
+    
+    public ImageView getConexionI() {
+        return ConexionI;
     }
     
     public ImageView getBnotiI_2() {

@@ -70,6 +70,7 @@ public class ControladorMenu {
     int time = 0;
     int TempC= 0;
     int Cperfil= 0;
+    int CambioConexion = 0;
     private Thread serverThread;
     private AtomicReference<ConexionSocket> socketConnectionRef = new AtomicReference<>();
     static final int DATA_SERIES_SIZE = 10; // Número máximo de puntos en la serie de datos
@@ -97,6 +98,18 @@ public class ControladorMenu {
 	    }));
 	clockTimeline.setCycleCount(Timeline.INDEFINITE);
 	clockTimeline.play();
+        
+        
+        if(CambioConexion == 0){
+            menuPrincipal.getConexionI().setImage(menuPrincipal.getConexionI1());
+            menuPrincipal.getLConexion().setText("Conectado");
+        }
+        else if(CambioConexion == 1){
+            menuPrincipal.getConexionI().setImage(menuPrincipal.getConexionI2());
+            menuPrincipal.getLConexion().setText("Desconectado");
+        }
+        
+        
         
         ToggleButton Bnoti = menuPrincipal.getBnoti();
         Bnoti.setOnMouseEntered(event -> {
@@ -509,7 +522,7 @@ public class ControladorMenu {
                 String vTiempo= menuPrincipal.getLtiempo().getText();
                 double randomValue2 = 50+MIN_Y_VALUE + Math.random() * (MAX_Y_VALUE - MIN_Y_VALUE);
                 double randomValue3 = 100+MIN_Y_VALUE + Math.random() * (MAX_Y_VALUE - MIN_Y_VALUE);
-
+                fill();
                     try {
                         // Convertir la cadena de tiempo a un número
                         // Actualizar los valores existentes en la serie

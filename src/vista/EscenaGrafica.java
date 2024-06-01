@@ -41,9 +41,9 @@ public class EscenaGrafica {
     private Button Bperfil;
     private Button Bperfil2;
     
-    static final int DATA_SERIES_SIZE = 10; // Número máximo de puntos en la serie de datos
-    static final int MIN_Y_VALUE = 20;
-    static  int MAX_Y_VALUE = 50;
+    static final int DATA_SERIES_SIZE = 100; // Número máximo de puntos en la serie de datos
+    static final int MIN_Y_VALUE = 300;
+    static  int MAX_Y_VALUE = 400;
     
     XYChart.Series<Number, Number> dataSeries = new XYChart.Series<>();
     int time = 0;
@@ -280,15 +280,19 @@ public class EscenaGrafica {
        
         lineChart.setLayoutX(104);
         lineChart.setLayoutY(50);
-        lineChart.setPrefSize(500, 200);
+        lineChart.setPrefSize(600, 350);
         lineChart.setCreateSymbols(false);
         lineChart.setAnimated(false);
         lineChart.setHorizontalGridLinesVisible(false);
         lineChart.setVerticalGridLinesVisible(false);
         lineChart.setStyle("-fx-background-color: white;-fx-background-radius: 10");
         
+        
         yAxis.setAnimated(false);
         yAxis.setAutoRanging(false);
+        yAxis.setTickUnit(20);
+        yAxis.setLowerBound(25);
+        yAxis.setUpperBound(400);
         yAxis.setLowerBound(0);
         xAxis.setAnimated(false);
         xAxis.setAutoRanging(false);
@@ -297,6 +301,14 @@ public class EscenaGrafica {
         xAxis.setUpperBound(DATA_SERIES_SIZE - 1);
         lineChart.getData().add(dataSeries);
         
+        
+        DropShadow dropShadow1 = new DropShadow();
+        dropShadow1.setHeight(22.47);
+        dropShadow1.setWidth(22.47);
+        dropShadow1.setOffsetY(8);
+        dropShadow1.setRadius(10.8675);
+        dropShadow1.setColor(new Color(0, 0, 0, 0.2862595319747925));
+        lineChart.setEffect(dropShadow1);
         
         anchorPane3.getChildren().addAll(menu,slideMenu, lineChart,Lhora,separador,Bnoti,Bconfig,Bpower,separador2,bienvenida,Menu);
         
